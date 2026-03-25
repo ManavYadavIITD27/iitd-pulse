@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IITD Pulse | Pharmacy Fulfillment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../../css/shared.css"/>
+<script src="../../js/shared.js" defer></script>
+<script src="../../js/auth.js" defer></script>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#570000","primary-container":"#800000","on-primary":"#ffffff","on-primary-container":"#ff8371","secondary":"#00629d","secondary-container":"#00a2fd","on-secondary":"#ffffff","on-secondary-container":"#003558","tertiary":"#18283c","tertiary-container":"#2e3e53","on-tertiary":"#ffffff","on-tertiary-container":"#99a9c2","surface":"#f7f9fb","surface-container":"#eceef0","surface-container-low":"#f2f4f6","surface-container-lowest":"#ffffff","surface-container-high":"#e6e8ea","surface-container-highest":"#e0e3e5","on-surface":"#191c1e","on-surface-variant":"#5a413d","outline":"#8e706c","outline-variant":"#e2bfb9","error":"#ba1a1a","error-container":"#ffdad6","on-error":"#ffffff","on-error-container":"#93000a","primary-fixed":"#ffdad4","secondary-fixed":"#cfe5ff","inverse-surface":"#2d3133","surface-tint":"#b22b1d","surface-dim":"#d8dadc","surface-bright":"#f7f9fb","tertiary-fixed":"#d3e4fe","surface-variant":"#e0e3e5"},fontFamily:{"headline":["Manrope"],"body":["Inter"],"label":["Inter"]},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}}}}</script>
+<style>.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}</style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<nav class="top-nav glass"><div class="flex items-center gap-8"><a href="#" class="brand">IITD Pulse — Pharmacy</a></div><div class="flex items-center gap-4"><button class="hamburger hidden p-2 hover:bg-slate-100/50 rounded-full"><span class="material-symbols-outlined">menu</span></button><button class="p-2 hover:bg-slate-100/50 rounded-full"><span class="material-symbols-outlined text-slate-600">notifications</span></button><span class="text-sm font-bold text-secondary bg-secondary-fixed px-4 py-1.5 rounded-full">Pharmacy Desk</span></div></nav>
+
+<div class="flex pt-16 min-h-screen">
+  <aside class="side-nav">
+    <div class="px-4 py-3 mb-4"><h2 class="text-lg font-bold text-primary font-headline">Pharmacy Hub</h2><p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Fulfillment Center</p></div>
+    <nav class="flex-1 flex flex-col gap-1">
+      <a class="nav-link" href="doctor.html"><span class="material-symbols-outlined">stethoscope</span>Doctor Panel</a>
+      <a class="nav-link active" href="pharmacy.html"><span class="material-symbols-outlined">local_pharmacy</span>Pharmacy Queue</a>
+      <a class="nav-link" href="#"><span class="material-symbols-outlined">inventory_2</span>Inventory</a>
+    </nav>
+    <div class="px-2 mt-auto pb-4 pt-4 border-t border-slate-200/50"><a href="login.html" class="sign-out-link"><span class="material-symbols-outlined">logout</span>Sign Out</a></div>
+  </aside>
+
+  <main class="main-content p-6 md:p-10">
+    <header class="mb-10 anim-fade-up">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div><h1 class="text-3xl md:text-4xl font-extrabold font-headline text-primary tracking-tight mb-2">Prescription Fulfillment Queue</h1><p class="text-on-surface-variant">Dispense medications directly from digital prescriptions — no booklet required.</p></div>
+        <div class="flex gap-3">
+          <div class="relative"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base">search</span><input class="pl-10 pr-4 py-2.5 bg-surface-container-low border-0 rounded-xl focus:ring-2 focus:ring-secondary/20 text-sm w-56" placeholder="Roll No or Name..."/></div>
+          <button class="px-4 py-2.5 bg-secondary text-white rounded-xl font-bold flex items-center gap-2 text-sm active:scale-95 transition-all"><span class="material-symbols-outlined text-base">qr_code_scanner</span>Scan</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Pending Queue -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 space-y-4 anim-fade-up delay-1">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="font-headline font-bold text-xl flex items-center gap-2"><span class="w-3 h-3 bg-error rounded-full animate-pulse"></span>Pending Prescriptions</h2>
+          <span class="text-xs font-bold text-slate-400">3 items</span>
+        </div>
+
+        <!-- Queue Item 1 -->
+        <div class="bg-surface-container-lowest rounded-3xl p-6 border border-error/20 shadow-sm transition-all hover:shadow-md">
+          <div class="flex flex-col md:flex-row gap-6 items-start">
+            <div class="w-16 h-16 rounded-full bg-error-container flex items-center justify-center text-error font-black text-xl">AK</div>
+            <div class="flex-1">
+              <div class="flex flex-wrap gap-4 mb-3">
+                <div><p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Patient</p><p class="font-bold text-primary font-headline">Arnav Kumar</p></div>
+                <div><p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Roll No</p><p class="font-bold">2023CS10452</p></div>
+                <div><p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Prescribed By</p><p class="font-bold">Dr. Sameer Khurana</p></div>
+              </div>
+              <div class="bg-surface-container-low rounded-xl p-4 space-y-2 mb-4">
+                <div class="flex items-center gap-3"><input type="checkbox" class="text-secondary focus:ring-secondary rounded"/><span class="text-sm"><strong>Paracetamol 500mg</strong> — 1-0-1 × 5 days</span><span class="text-xs text-secondary font-bold bg-secondary/10 px-2 py-0.5 rounded">In Stock</span></div>
+                <div class="flex items-center gap-3"><input type="checkbox" class="text-secondary focus:ring-secondary rounded"/><span class="text-sm"><strong>Amoxicillin 250mg</strong> — 1-1-1 × 5 days</span><span class="text-xs text-secondary font-bold bg-secondary/10 px-2 py-0.5 rounded">In Stock</span></div>
+              </div>
+              <div class="flex gap-3">
+                <button onclick="this.closest('.bg-surface-container-lowest').style.opacity='0.3';Toast.show('Prescription dispensed! SMS sent to Arnav Kumar.','success')" class="px-6 py-3 bg-primary text-white rounded-xl font-bold flex items-center gap-2 active:scale-95 transition-all shadow-lg shadow-primary/20"><span class="material-symbols-outlined">check_circle</span>Dispense & Notify</button>
+                <button class="px-6 py-3 bg-surface-container-high text-on-surface-variant rounded-xl font-bold flex items-center gap-2 hover:bg-surface-dim transition-colors"><span class="material-symbols-outlined">visibility</span>Full Record</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Queue Item 2 -->
+        <div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/10 shadow-sm transition-all hover:shadow-md">
+          <div class="flex flex-col md:flex-row gap-6 items-start">
+            <div class="w-16 h-16 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary font-black text-xl">PM</div>
+            <div class="flex-1">
+              <div class="flex flex-wrap gap-4 mb-3">
+                <div><p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Patient</p><p class="font-bold text-primary font-headline">Priya Mehta</p></div>
+                <div><p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Roll No</p><p class="font-bold">2022EE10327</p></div>
+                <div><p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Prescribed By</p><p class="font-bold">Dr. Anita Sharma</p></div>
+              </div>
+              <div class="bg-surface-container-low rounded-xl p-4 space-y-2 mb-4">
+                <div class="flex items-center gap-3"><input type="checkbox" class="text-secondary focus:ring-secondary rounded"/><span class="text-sm"><strong>Ibuprofen 400mg</strong> — 0-0-1 × 7 days</span><span class="text-xs text-error font-bold bg-error-container px-2 py-0.5 rounded">Low Stock ⚠</span></div>
+              </div>
+              <div class="flex gap-3">
+                <button class="px-6 py-3 bg-primary text-white rounded-xl font-bold flex items-center gap-2 active:scale-95 transition-all"><span class="material-symbols-outlined">check_circle</span>Dispense & Notify</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stock Alerts -->
+      <div class="space-y-6 anim-fade-up delay-2">
+        <div class="bg-error-container rounded-3xl p-8 border border-error/10">
+          <h3 class="font-headline font-bold text-lg mb-4 flex items-center gap-2 text-on-error-container"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">warning</span>Stock Alerts</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center"><div><p class="font-bold text-sm text-on-error-container">Ibuprofen 400mg</p><p class="text-xs text-error">12 units left</p></div><button class="text-xs font-bold text-error bg-white px-3 py-1 rounded-full">Reorder</button></div>
+            <div class="flex justify-between items-center"><div><p class="font-bold text-sm text-on-error-container">Cetirizine 10mg</p><p class="text-xs text-error">8 units left</p></div><button class="text-xs font-bold text-error bg-white px-3 py-1 rounded-full">Reorder</button></div>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/10">
+          <h3 class="font-headline font-bold text-sm mb-4 uppercase tracking-widest text-slate-500">Today's Stats</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="text-center"><p class="text-3xl font-black text-primary font-headline">24</p><p class="text-xs text-slate-400">Dispensed</p></div>
+            <div class="text-center"><p class="text-3xl font-black text-error font-headline">3</p><p class="text-xs text-slate-400">Pending</p></div>
+            <div class="text-center"><p class="text-3xl font-black text-secondary font-headline">2</p><p class="text-xs text-slate-400">Low Stock</p></div>
+            <div class="text-center"><p class="text-3xl font-black text-tertiary font-headline">98%</p><p class="text-xs text-slate-400">Fill Rate</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body></html>

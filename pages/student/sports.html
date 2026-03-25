@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IITD Pulse | Sports Facility Booking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../../css/shared.css"/>
+<script src="../../js/shared.js" defer></script>
+<script src="../../js/auth.js" defer></script>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#570000","primary-container":"#800000","on-primary":"#ffffff","on-primary-container":"#ff8371","secondary":"#00629d","secondary-container":"#00a2fd","on-secondary":"#ffffff","on-secondary-container":"#003558","tertiary":"#18283c","tertiary-container":"#2e3e53","on-tertiary":"#ffffff","on-tertiary-container":"#99a9c2","surface":"#f7f9fb","surface-container":"#eceef0","surface-container-low":"#f2f4f6","surface-container-lowest":"#ffffff","surface-container-high":"#e6e8ea","surface-container-highest":"#e0e3e5","on-surface":"#191c1e","on-surface-variant":"#5a413d","outline":"#8e706c","outline-variant":"#e2bfb9","error":"#ba1a1a","error-container":"#ffdad6","on-error":"#ffffff","on-error-container":"#93000a","primary-fixed":"#ffdad4","primary-fixed-dim":"#ffb4a8","secondary-fixed":"#cfe5ff","secondary-fixed-dim":"#98cbff","inverse-surface":"#2d3133","inverse-on-surface":"#eff1f3","inverse-primary":"#ffb4a8","surface-tint":"#b22b1d","surface-dim":"#d8dadc","surface-bright":"#f7f9fb","tertiary-fixed":"#d3e4fe","tertiary-fixed-dim":"#b7c8e1","on-primary-fixed":"#410000","on-secondary-fixed":"#001d33","on-primary-fixed-variant":"#8f0f07","on-secondary-fixed-variant":"#004a77","surface-variant":"#e0e3e5"},fontFamily:{"headline":["Manrope"],"body":["Inter"],"label":["Inter"]},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}}}}</script>
+<style>.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}.academic-gradient{background:linear-gradient(135deg,#570000 0%,#800000 100%);}</style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<nav class="top-nav glass">
+  <div class="flex items-center gap-8"><a href="hub.html" class="brand">IITD Pulse</a>
+    <div class="nav-links hidden md:flex gap-6 items-center">
+      <a class="font-headline font-bold tracking-tight text-slate-600 hover:text-primary transition-colors" href="hub.html">Dashboard</a>
+      <a class="font-headline font-bold tracking-tight text-slate-600 hover:text-primary transition-colors" href="hospital.html">Medical</a>
+      <a class="font-headline font-bold tracking-tight text-primary border-b-2 border-primary pb-1" href="sports.html">Sports</a>
+      <a class="font-headline font-bold tracking-tight text-slate-600 hover:text-primary transition-colors" href="campus-care.html">Campus Care</a>
+    </div>
+  </div>
+  <div class="flex items-center gap-4">
+    <button class="hamburger hidden p-2 hover:bg-slate-100/50 rounded-full"><span class="material-symbols-outlined">menu</span></button>
+    <button class="p-2 rounded-full hover:bg-slate-100/50 transition-colors"><span class="material-symbols-outlined text-slate-600">notifications</span></button>
+    <button class="p-2 rounded-full hover:bg-slate-100/50 transition-colors"><span class="material-symbols-outlined text-slate-600">account_circle</span></button>
+  </div>
+</nav>
+<div class="flex pt-16 min-h-screen">
+  <aside class="side-nav">
+    <div class="px-4 py-3 mb-4"><h2 class="text-lg font-bold text-primary font-headline">IIT Delhi</h2><p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Academic Pulse</p></div>
+    <nav class="flex-1 flex flex-col gap-1">
+      <a class="nav-link" href="hub.html"><span class="material-symbols-outlined">grid_view</span>Home</a>
+      <a class="nav-link" href="hospital.html"><span class="material-symbols-outlined">medical_services</span>Health</a>
+      <a class="nav-link active" href="sports.html"><span class="material-symbols-outlined">sports_kabaddi</span>Athletics</a>
+      <a class="nav-link" href="campus-care.html"><span class="material-symbols-outlined">campaign</span>Reports</a>
+    </nav>
+    <div class="px-2 mt-auto pb-4 pt-4 border-t border-slate-200/50">
+      <a href="login.html" class="sign-out-link"><span class="material-symbols-outlined">logout</span>Sign Out</a>
+    </div>
+  </aside>
+
+  <main class="main-content flex-1 p-6 md:p-8 overflow-y-auto bg-surface">
+    <!-- Hero -->
+    <section class="mb-12 anim-fade-up">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 relative h-[340px] rounded-3xl overflow-hidden group shadow-2xl">
+          <img alt="Sports Hub" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa6G0EYmE59d7QWoQDoc1sTlYQFz-xntS_qX8OBi8itsBphpE2kygHqe8k4GgPwMLb_4EoacZLAJ-BV4nZhruEYu0mTv8qIpzvN8eXw5-_zTUGQqr4z_knZqAJf3G_npA2mYoaPpsmaJ0yRXxO3rF0FdIuegjk-K744apqtaKZfY4s6MsEkl0zzZ9m3PlhZV3RAXK9Tha4N9Sxt7ldmnwkuw_Ukfp2QUIFdmO_9X-6wfWIFzXHqze9T-xBWTKZNaO4CLBx-BBp2p3z"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold font-headline text-white mb-2 -tracking-tight">Elite Athletics Hub</h1>
+            <p class="text-white/80 max-w-lg font-body mb-6">Access world-class facilities and professional equipment rentals at the heart of IIT Delhi.</p>
+            <div class="flex gap-4">
+              <a href="sports-checkout.html" class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-secondary-container/90 transition-all active:scale-95"><span class="material-symbols-outlined">star</span>Premium Membership</a>
+              <button class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-bold hover:bg-white/20 transition-all active:scale-95">View Rules</button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-surface-container-low rounded-3xl p-8 flex flex-col justify-between border border-outline-variant/15">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary mb-4 block">Membership Tiers</span>
+            <h2 class="text-2xl font-bold font-headline mb-4">Pulse Subscription</h2>
+            <div class="space-y-4">
+              <label class="flex items-center justify-between p-4 rounded-2xl bg-white border-2 border-secondary cursor-pointer">
+                <div class="flex items-center gap-3"><input checked name="subs" type="radio" class="text-secondary focus:ring-secondary"/><div><div class="font-bold">4-Year Elite</div><div class="text-xs text-slate-500">Full Degree Access</div></div></div>
+                <div class="font-black text-primary">₹12,500</div>
+              </label>
+              <label class="flex items-center justify-between p-4 rounded-2xl bg-white/50 border border-outline-variant/30 cursor-pointer hover:bg-white transition-colors">
+                <div class="flex items-center gap-3"><input name="subs" type="radio" class="text-secondary focus:ring-secondary"/><div><div class="font-bold">1-Year Basic</div><div class="text-xs text-slate-500">Annual Renewal</div></div></div>
+                <div class="font-black">₹3,999</div>
+              </label>
+            </div>
+          </div>
+          <a href="sports-checkout.html" class="w-full bg-primary text-white py-4 rounded-xl font-black text-lg mt-6 shadow-xl shadow-primary/20 hover:opacity-90 active:scale-98 transition-all text-center block">ACTIVATE NOW</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Facilities Grid -->
+    <section class="mb-12 anim-fade-up delay-2">
+      <div class="flex justify-between items-end mb-8">
+        <div><h2 class="text-3xl font-black font-headline tracking-tighter text-primary">Live Facilities</h2><p class="text-slate-500">Real-time occupancy and slot availability</p></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="md:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive">
+          <div class="h-48 rounded-2xl overflow-hidden relative">
+            <img alt="Football" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvbeyAVtAvJJD6DccyGefBsiSGke4mIObASpJ9q4ieNxWwTW6jssezhqA2n52vcfQ0jaO8O_UBwPTTMCbFpcVjHh0L7Jmru6LOm_9BgyTAUkxjUMk5Kf-GFFauu6MnoS67vfoRUO-tJ1SZGJ3mnQqBw5CSxYdSkzb6i1BND_mqIFQa75Vuc8wbk1clMr1QbVIY3gws0yn9g9HTTsOCZr-vjd4RinwEZtjxpxvEMwXEUcjSdRMwMxHJF51Ukr9uPoTx8mvaaWAL5Enf"/>
+            <div class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>ACTIVE</div>
+          </div>
+          <div class="flex justify-between items-start"><div><h3 class="text-xl font-bold font-headline">Main Football Arena</h3><p class="text-sm text-slate-500">Capacity: 2 Teams (Full Pitch)</p></div><div class="text-right"><div class="text-xs font-bold uppercase text-slate-400">Next Slot</div><div class="text-lg font-black text-primary">05:30 PM</div></div></div>
+          <div class="flex gap-2"><span class="px-3 py-1 bg-surface-container rounded-full text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">EQUIPMENT: RENTABLE</span></div>
+          <button class="w-full py-3 bg-primary text-white rounded-xl font-bold active:scale-95 transition-all" onclick="Toast.show('Football Ground booked for 5:30 PM! Confirmation sent via SMS & Email.','success')">Book Slot</button>
+        </div>
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive">
+          <div class="h-32 rounded-2xl overflow-hidden relative">
+            <img alt="Tennis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADiTgdxSl3fGY4Wl_riPlGUkf1fKFlu5TZtM5W15_dLJ4wldLq16oC9_ce9naH5BAqzIFuR0Hydaz8q6oYa4WxKaqfVL6MgRueeWP530kbZnY6qKoXdOZuAjeyDdssaT4oEejzoA2lOs7GLhc3hm3uAZ24_MARzos1Yvj67wwFCG2mVCqmF6S5B9dxjBKS8c8Wsdt2Riz5i5JdymB9spNXe9DI5oiyIxJGlym2v0-3dFHMMiNQnTbHccy4YdaRillhGpQ1DTbOyDnc"/>
+            <div class="absolute top-3 right-3 bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold">2 SLOTS LEFT</div>
+          </div>
+          <div><h3 class="font-bold font-headline">Clay Courts 1-4</h3><p class="text-xs text-slate-500">Synthetic Pro Surface</p></div>
+          <button class="w-full py-2 bg-surface-container-high text-on-surface-variant rounded-xl font-bold hover:bg-primary hover:text-white transition-all">View Slots</button>
+        </div>
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive">
+          <div class="h-32 rounded-2xl overflow-hidden relative">
+            <img alt="Gym" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA45yHTwJmt9Dl4YRL872asVDTaPOGonjWyLWPr7Ze_vhJQFmzupxvcstZ_HV8dT44gqHQTGpPO5r9sIeQnGORtzVBrjoEl9v3GDsjYyyLc5j1UAu2E8dq10DZ0d_vnw_DOgrDE4qi3i2rSNybDOXRkhD4ySvDRNXLi4arEQ9wcIBOWCbQp0-m979UDhL8-9TldEmomnFq_zemSyvEwnRW11OHsVWlFf2e5Rd8sz15DvHY_mdH3pOuqLB54418oVT06IUl2p50bqkB1"/>
+            <div class="absolute top-3 right-3 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold">45% CAPACITY</div>
+          </div>
+          <div><h3 class="font-bold font-headline">Main Fitness Hub</h3><p class="text-xs text-slate-500">Strength & Cardio</p></div>
+          <button class="w-full py-2 bg-surface-container-high text-on-surface-variant rounded-xl font-bold hover:bg-primary hover:text-white transition-all">Check Entry</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rentals + Active Sessions -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 anim-fade-up delay-3">
+      <div class="lg:col-span-1">
+        <h2 class="text-2xl font-black font-headline tracking-tighter text-primary mb-6">Equipment Rental</h2>
+        <div class="bg-white rounded-3xl overflow-hidden border border-slate-100">
+          <div class="p-4 border-b border-slate-50 flex items-center justify-between bg-slate-50/50"><span class="font-bold text-sm">Item</span><span class="font-bold text-sm">Per Hr</span></div>
+          <div class="p-4 space-y-4">
+            <div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-primary">sports_soccer</span></div><div class="text-sm font-semibold">Match Football</div></div><div class="text-sm font-bold">₹50</div></div>
+            <div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-primary">sports_tennis</span></div><div class="text-sm font-semibold">Wilson Pro Rack</div></div><div class="text-sm font-bold">₹120</div></div>
+            <div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-primary">table_rows</span></div><div class="text-sm font-semibold">Table Tennis Kit</div></div><div class="text-sm font-bold">₹40</div></div>
+          </div>
+          <div class="p-4 bg-primary/5"><p class="text-[10px] text-primary/70 font-bold uppercase text-center">Security deposit applicable for non-members</p></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2">
+        <div class="flex justify-between items-center mb-6"><h2 class="text-2xl font-black font-headline tracking-tighter text-primary">Active Sessions</h2><button class="text-secondary font-bold text-sm hover:underline">History</button></div>
+        <div class="space-y-4">
+          <div class="bg-white p-6 rounded-3xl border border-slate-100 flex flex-col md:flex-row gap-6 items-center">
+            <div class="w-full md:w-24 h-24 rounded-2xl bg-secondary-container flex flex-col items-center justify-center text-on-secondary-container"><div class="text-2xl font-black">26</div><div class="text-[10px] font-bold uppercase tracking-widest">MAR</div></div>
+            <div class="flex-1 text-center md:text-left"><div class="text-[10px] font-black text-secondary uppercase tracking-[0.2em] mb-1">Upcoming</div><h3 class="text-lg font-bold font-headline">Badminton Court #3</h3><p class="text-sm text-slate-500">06:00 PM - 07:00 PM • Multi-Sports Hall</p></div>
+            <div class="flex gap-2 w-full md:w-auto"><button class="flex-1 md:flex-none p-4 rounded-2xl bg-surface-container text-on-surface hover:bg-slate-200 transition-colors"><span class="material-symbols-outlined">qr_code_2</span></button><button class="flex-1 md:flex-none px-6 py-4 rounded-2xl bg-error-container text-on-error-container font-bold hover:bg-error/10 transition-colors">Cancel</button></div>
+          </div>
+          <div class="bg-surface-container-low p-6 rounded-3xl border border-outline-variant/10 flex flex-col md:flex-row gap-6 items-center opacity-60">
+            <div class="w-full md:w-24 h-24 rounded-2xl bg-slate-200 flex flex-col items-center justify-center text-slate-500"><div class="text-2xl font-black text-slate-400">24</div><div class="text-[10px] font-bold uppercase tracking-widest">MAR</div></div>
+            <div class="flex-1 text-center md:text-left"><div class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Completed</div><h3 class="text-lg font-bold font-headline">Olympic Pool Lane 4</h3><p class="text-sm text-slate-500">07:00 AM - 08:00 AM • Aquatic Center</p></div>
+            <div class="text-slate-400"><span class="material-symbols-outlined text-4xl">check_circle</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<nav class="bottom-nav glass">
+  <a href="hub.html"><span class="material-symbols-outlined">dashboard</span><span>Hub</span></a>
+  <a href="hospital.html"><span class="material-symbols-outlined">local_hospital</span><span>Health</span></a>
+  <a class="active" href="sports.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">fitness_center</span><span>Sports</span></a>
+  <a href="campus-care.html"><span class="material-symbols-outlined">support_agent</span><span>Care</span></a>
+</nav>
+</body></html>

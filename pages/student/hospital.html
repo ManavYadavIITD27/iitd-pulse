@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IITD Pulse | Hospital Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../../css/shared.css"/>
+<script src="../../js/shared.js" defer></script>
+<script src="../../js/auth.js" defer></script>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#570000","primary-container":"#800000","on-primary":"#ffffff","on-primary-container":"#ff8371","secondary":"#00629d","secondary-container":"#00a2fd","on-secondary":"#ffffff","on-secondary-container":"#003558","tertiary":"#18283c","tertiary-container":"#2e3e53","on-tertiary":"#ffffff","on-tertiary-container":"#99a9c2","surface":"#f7f9fb","surface-container":"#eceef0","surface-container-low":"#f2f4f6","surface-container-lowest":"#ffffff","surface-container-high":"#e6e8ea","surface-container-highest":"#e0e3e5","on-surface":"#191c1e","on-surface-variant":"#5a413d","outline":"#8e706c","outline-variant":"#e2bfb9","error":"#ba1a1a","error-container":"#ffdad6","on-error":"#ffffff","on-error-container":"#93000a","primary-fixed":"#ffdad4","primary-fixed-dim":"#ffb4a8","secondary-fixed":"#cfe5ff","secondary-fixed-dim":"#98cbff","inverse-surface":"#2d3133","inverse-on-surface":"#eff1f3","inverse-primary":"#ffb4a8","surface-tint":"#b22b1d","surface-dim":"#d8dadc","surface-bright":"#f7f9fb","tertiary-fixed":"#d3e4fe","tertiary-fixed-dim":"#b7c8e1","on-primary-fixed":"#410000","on-secondary-fixed":"#001d33","on-primary-fixed-variant":"#8f0f07","on-secondary-fixed-variant":"#004a77","on-tertiary-fixed":"#0b1c30","surface-variant":"#e0e3e5"},fontFamily:{"headline":["Manrope"],"body":["Inter"],"label":["Inter"]},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}}}}</script>
+<style>.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}.no-scrollbar::-webkit-scrollbar{display:none;}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}.academic-gradient{background:linear-gradient(135deg,#570000 0%,#800000 100%);}</style>
+</head>
+<body class="bg-surface text-on-surface font-body">
+<!-- TopNavBar -->
+<nav class="top-nav glass">
+  <div class="flex items-center gap-8">
+    <a href="hub.html" class="brand">IITD Pulse</a>
+    <div class="nav-links hidden md:flex gap-6 items-center">
+      <a class="font-headline font-bold tracking-tight text-slate-600 hover:text-primary transition-colors" href="hub.html">Dashboard</a>
+      <a class="font-headline font-bold tracking-tight text-primary border-b-2 border-primary pb-1" href="hospital.html">Medical</a>
+      <a class="font-headline font-bold tracking-tight text-slate-600 hover:text-primary transition-colors" href="sports.html">Sports</a>
+      <a class="font-headline font-bold tracking-tight text-slate-600 hover:text-primary transition-colors" href="campus-care.html">Campus Care</a>
+    </div>
+  </div>
+  <div class="flex items-center gap-4">
+    <button class="hamburger hidden p-2 hover:bg-slate-100/50 rounded-full"><span class="material-symbols-outlined">menu</span></button>
+    <button class="p-2 hover:bg-slate-100/50 rounded-full"><span class="material-symbols-outlined text-slate-600">notifications</span></button>
+    <button class="p-2 hover:bg-slate-100/50 rounded-full"><span class="material-symbols-outlined text-slate-600">account_circle</span></button>
+  </div>
+</nav>
+
+<div class="flex pt-16 min-h-screen">
+  <aside class="side-nav">
+    <div class="px-4 py-3 mb-4"><h2 class="text-lg font-bold text-primary font-headline">IIT Delhi</h2><p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Academic Pulse</p></div>
+    <nav class="flex-1 flex flex-col gap-1">
+      <a class="nav-link" href="hub.html"><span class="material-symbols-outlined">grid_view</span>Home</a>
+      <a class="nav-link active" href="hospital.html"><span class="material-symbols-outlined">medical_services</span>Health</a>
+      <a class="nav-link" href="sports.html"><span class="material-symbols-outlined">sports_kabaddi</span>Athletics</a>
+      <a class="nav-link" href="campus-care.html"><span class="material-symbols-outlined">campaign</span>Reports</a>
+    </nav>
+    <div class="px-2 mt-auto pb-4 pt-4 border-t border-slate-200/50">
+      <a href="login.html" class="sign-out-link"><span class="material-symbols-outlined">logout</span>Sign Out</a>
+    </div>
+  </aside>
+
+  <main class="main-content p-4 md:p-8 bg-surface">
+    <!-- Header -->
+    <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 anim-fade-up">
+      <div class="max-w-2xl">
+        <span class="text-xs font-bold text-secondary uppercase tracking-[0.2em] block mb-2">Hospital Services</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold font-headline text-primary tracking-tight mb-4">Patient Care & Clinical Pulse</h1>
+        <p class="text-lg text-on-surface-variant leading-relaxed">Schedule appointments, view prescriptions, and manage medical documentation.</p>
+      </div>
+      <div class="relative group">
+        <div class="absolute inset-0 bg-secondary/10 blur-2xl rounded-full -z-10 group-hover:bg-secondary/20 transition-all"></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 p-6 rounded-3xl shadow-lg flex items-center gap-6">
+          <div class="text-right"><p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Medical ID</p><p class="font-headline font-bold text-primary">2023CSB1104</p></div>
+          <div class="w-16 h-16 bg-white p-1 rounded-lg border border-slate-100 flex items-center justify-center"><span class="material-symbols-outlined text-4xl text-slate-900" style="font-variation-settings:'wght' 200;">qr_code_2</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <!-- Appointment Booking -->
+      <section class="md:col-span-8 space-y-6">
+        <div class="bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant/10 shadow-sm anim-fade-up delay-1">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold font-headline text-primary">Schedule Appointment</h2>
+            <div class="flex gap-2">
+              <span class="px-4 py-1.5 bg-secondary/10 text-secondary text-xs font-bold rounded-full cursor-pointer">Primary Care</span>
+              <span class="px-4 py-1.5 bg-slate-100 text-slate-500 text-xs font-bold rounded-full cursor-pointer hover:bg-secondary/10 hover:text-secondary transition-colors">Specialist</span>
+            </div>
+          </div>
+
+          <!-- Search -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+              <input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-secondary/20 text-sm font-medium" placeholder="Search doctor or department..." type="text"/>
+            </div>
+            <select class="w-full px-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-secondary/20 text-sm font-medium">
+              <option>All Departments</option><option>Internal Medicine</option><option>Orthopedics</option><option>Mental Health</option><option>Physiotherapy</option>
+            </select>
+          </div>
+
+          <!-- Calendar Strip -->
+          <div class="flex gap-3 overflow-x-auto no-scrollbar mb-8 pb-2">
+            <button class="flex-shrink-0 w-20 h-24 rounded-2xl border border-secondary bg-secondary/5 flex flex-col items-center justify-center gap-1">
+              <span class="text-[10px] font-bold text-secondary uppercase">Mar</span><span class="text-2xl font-black text-secondary">26</span><span class="text-[10px] font-bold text-slate-400 uppercase">Today</span>
+            </button>
+            <button class="flex-shrink-0 w-20 h-24 rounded-2xl border border-slate-100 hover:border-secondary transition-colors flex flex-col items-center justify-center gap-1">
+              <span class="text-[10px] font-bold text-slate-400 uppercase">Mar</span><span class="text-2xl font-black text-slate-700">27</span><span class="text-[10px] font-bold text-slate-400 uppercase">Thu</span>
+            </button>
+            <button class="flex-shrink-0 w-20 h-24 rounded-2xl border border-slate-100 hover:border-secondary transition-colors flex flex-col items-center justify-center gap-1">
+              <span class="text-[10px] font-bold text-slate-400 uppercase">Mar</span><span class="text-2xl font-black text-slate-700">28</span><span class="text-[10px] font-bold text-slate-400 uppercase">Fri</span>
+            </button>
+            <button class="flex-shrink-0 w-20 h-24 rounded-2xl border border-slate-100 opacity-40 flex flex-col items-center justify-center gap-1">
+              <span class="text-[10px] font-bold text-slate-400 uppercase">Mar</span><span class="text-2xl font-black text-slate-700">29</span><span class="text-[10px] font-bold text-slate-400 uppercase">Sat</span>
+            </button>
+            <button class="flex-shrink-0 w-20 h-24 rounded-2xl border border-slate-100 hover:border-secondary transition-colors flex flex-col items-center justify-center gap-1">
+              <span class="text-[10px] font-bold text-slate-400 uppercase">Mar</span><span class="text-2xl font-black text-slate-700">31</span><span class="text-[10px] font-bold text-slate-400 uppercase">Mon</span>
+            </button>
+          </div>
+
+          <!-- Doctor List -->
+          <div class="space-y-4">
+            <div class="flex items-center justify-between p-4 bg-surface hover:bg-slate-50 rounded-xl transition-all group cursor-pointer" onclick="Toast.show('Appointment booked with Dr. Sameer Khurana at 10:30 AM! Email & SMS sent.','success')">
+              <div class="flex items-center gap-4">
+                <img class="w-14 h-14 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4FhLirZQnUZhyj7GHM6ARA3r5Th4q5hXK2u3lv12C1DJjE6-EaY7l0KQ1RW-emIfaZcNX_Epy6kY6IuYE4P2z6Cf7iTmpvbiJ3Av3ippSvqRRwWDQ3gJ2S1DCJNPx7Y0fakYjbanvyP6Cbrjp8f5iNaXLxXUAimUaYxhtYJfUqpperz4_OiGPfelLchKBqBKmpPGZ46iTO9vM8U5rvIMzF3Ijpu91oH0mzYc99MdYW58I9P6QmoFVmfAUyaDm5Ju1RUmqO7cyf_QY" alt="Dr. Sameer"/>
+                <div><h4 class="font-bold text-primary font-headline">Dr. Sameer Khurana</h4><p class="text-xs text-slate-500 font-medium">Internal Medicine • Room 104</p></div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-secondary bg-secondary/10 px-3 py-1 rounded-full">Available • 10:30 AM</span>
+                <button class="p-2 bg-primary text-white rounded-lg active:scale-95 transition-all"><span class="material-symbols-outlined">arrow_forward</span></button>
+              </div>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-surface hover:bg-slate-50 rounded-xl transition-all group cursor-pointer">
+              <div class="flex items-center gap-4">
+                <img class="w-14 h-14 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqMUhRAuSgo46_8bUPLmhxP05PBiBWH0mEdbCPrC1lJXxbBKejZXY-bKuRUmN2E0hh90kz6oRbwxqJYIIzhqZgkw2d3nq3_dgtc7Dx8STpBfEqrk7cEh6SGS82y5xRvvxE4KuFcad2q8k7k3FCmeQO8fY0kDlRXSfXNmp9kauE5QyuoZwqRkqd9vaA0idenc0_RMxIW3Y9p3QbwzTi8UmPgDs0wHKx2mJStVPpWmIdujjyAvBCiBQohFJIGAcsTuT4aEA4bwp8j3jc" alt="Dr. Anita"/>
+                <div><h4 class="font-bold text-primary font-headline">Dr. Anita Sharma</h4><p class="text-xs text-slate-500 font-medium">Orthopedics • Room 209</p></div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-3 py-1 rounded-full">Waitlist • 15 mins</span>
+                <button class="p-2 bg-primary text-white rounded-lg active:scale-95 transition-all"><span class="material-symbols-outlined">arrow_forward</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prescription History -->
+        <div class="bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant/10 shadow-sm anim-fade-up delay-3">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold font-headline text-primary">Clinical Timeline</h2>
+            <button class="text-secondary text-sm font-bold flex items-center gap-1 hover:underline">View Archive <span class="material-symbols-outlined text-sm">open_in_new</span></button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-5 border-l-4 border-secondary bg-slate-50/50 rounded-r-2xl">
+              <div class="flex justify-between items-start mb-3">
+                <div><p class="text-[10px] font-bold text-slate-400 uppercase">Active Course</p><h5 class="font-bold text-primary font-headline">Seasonal Influenza</h5></div>
+                <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;">pill</span>
+              </div>
+              <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-xs"><span class="text-slate-500">Paracetamol 500mg</span><span class="font-bold">1-0-1</span></div>
+                <div class="flex justify-between text-xs"><span class="text-slate-500">Amoxicillin 250mg</span><span class="font-bold">1-1-1</span></div>
+              </div>
+              <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                <span class="text-[10px] font-bold text-slate-400">Issued: 22 Mar 2026</span>
+                <button class="text-xs font-bold text-secondary">Refill Request</button>
+              </div>
+            </div>
+            <div class="p-5 border-l-4 border-slate-200 bg-white rounded-r-2xl opacity-80">
+              <div class="flex justify-between items-start mb-3">
+                <div><p class="text-[10px] font-bold text-slate-400 uppercase">Completed Course</p><h5 class="font-bold text-slate-700 font-headline">Ligament Strain</h5></div>
+                <span class="material-symbols-outlined text-slate-300">check_circle</span>
+              </div>
+              <div class="space-y-2 mb-4"><div class="flex justify-between text-xs"><span class="text-slate-500">Ibuprofen 400mg</span><span class="font-bold">0-0-1</span></div></div>
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-[10px] font-bold text-slate-400">Issued: 15 Feb 2026</span>
+                <span class="text-xs font-bold text-slate-400">Ended</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sidebar -->
+      <aside class="md:col-span-4 space-y-6">
+        <!-- Medical Certificates -->
+        <div class="bg-primary text-white rounded-3xl p-8 shadow-xl relative overflow-hidden anim-fade-up delay-2">
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold font-headline mb-2">Medical Certificates</h3>
+            <p class="text-primary-fixed-dim text-sm mb-6 leading-snug">Download academic leave endorsements for current semester.</p>
+            <div class="space-y-4">
+              <button class="w-full flex items-center justify-between px-5 py-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all" onclick="Toast.show('Downloading Leave_Mar_26.pdf...','info')">
+                <div class="flex items-center gap-3"><span class="material-symbols-outlined">description</span><div class="text-left"><p class="text-xs font-bold">Leave_Mar_26.pdf</p><p class="text-[10px] opacity-60">Approved by Dean Health</p></div></div>
+                <span class="material-symbols-outlined">download</span>
+              </button>
+              <div class="flex items-center justify-between px-5 py-4 bg-primary-container rounded-2xl border border-white/10">
+                <div class="flex items-center gap-3"><span class="material-symbols-outlined">print</span><span class="text-xs font-bold">Physical Print Needed</span></div>
+                <div class="w-10 h-6 bg-primary-fixed rounded-full relative p-1 cursor-pointer"><div class="w-4 h-4 bg-white rounded-full ml-auto"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 border-[12px] border-white/5 rounded-full"></div>
+        </div>
+
+        <!-- Facility Status -->
+        <div class="bg-surface-container-low rounded-3xl p-8 border border-outline-variant/10 anim-fade-up delay-4">
+          <div class="flex items-center gap-3 mb-6"><div class="w-2 h-2 bg-error rounded-full animate-pulse"></div><h3 class="text-sm font-bold uppercase tracking-widest text-slate-500">Facility Status</h3></div>
+          <div class="space-y-6">
+            <div class="flex justify-between items-center"><span class="text-sm font-medium">IIT Hospital OPD</span><span class="text-xs font-bold text-secondary">Normal Traffic</span></div>
+            <div class="flex justify-between items-center"><span class="text-sm font-medium">Pathology Lab</span><span class="text-xs font-bold text-primary">High Volume</span></div>
+            <div class="flex justify-between items-center"><span class="text-sm font-medium">Pharmacy Counter</span><span class="text-xs font-bold text-secondary">Fast Track</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav glass">
+  <a href="hub.html"><span class="material-symbols-outlined">dashboard</span><span>Hub</span></a>
+  <a class="active" href="hospital.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">local_hospital</span><span>Health</span></a>
+  <a href="sports.html"><span class="material-symbols-outlined">fitness_center</span><span>Sports</span></a>
+  <a href="campus-care.html"><span class="material-symbols-outlined">support_agent</span><span>Care</span></a>
+</nav>
+</body></html>
