@@ -63,11 +63,11 @@ const Auth = {
   },
 
   // Demo credentials for testing
-  DEMO_STUDENT: { email: 'student@iitd.ac.in', password: 'iitd2024', name: 'Arnav Kumar', rollNo: '2023CS10452', role: 'student' },
+  DEMO_STUDENT: { email: 'student@iitd.ac.in', password: 'pulse2024', name: 'Arnav Kumar', rollNo: '2023CS10452', role: 'student' },
   DEMO_STAFF: {
-    medical: { email: 'doctor@iitd.ac.in', password: 'iitd2024', name: 'Dr. Aryan Sharma', role: 'staff', department: 'medical' },
-    sports: { email: 'sports@iitd.ac.in', password: 'iitd2024', name: 'Ravi Prakash', role: 'staff', department: 'sports' },
-    campuscare: { email: 'care@iitd.ac.in', password: 'iitd2024', name: 'Priya Verma', role: 'staff', department: 'campuscare' }
+    medical: { email: 'doctor@iitd.ac.in', password: 'pulse2024', name: 'Dr. Aryan Sharma', role: 'staff', department: 'medical' },
+    sports: { email: 'sports@iitd.ac.in', password: 'pulse2024', name: 'Ravi Prakash', role: 'staff', department: 'sports' },
+    campuscare: { email: 'care@iitd.ac.in', password: 'pulse2024', name: 'Priya Verma', role: 'staff', department: 'campuscare' }
   },
 
   attemptStudentLogin(email, password) {
@@ -76,9 +76,9 @@ const Auth = {
       Session.login(this.DEMO_STUDENT);
       return { success: true, user: this.DEMO_STUDENT };
     }
-    // For demo: any @iitd.ac.in email with password 'iitd2024' works
+    // For demo: any @iitd.ac.in email with password 'pulse2024' works
     const validation = this.validateEmail(email, ['iitd.ac.in']);
-    if (validation.valid && password === 'iitd2024') {
+    if (validation.valid && password === 'pulse2024') {
       const user = { email, password: '', name: email.split('@')[0].replace('.', ' '), rollNo: '2023XX10000', role: 'student' };
       this.resetAttempts();
       Session.login(user);
@@ -94,7 +94,7 @@ const Auth = {
       Session.login(demoStaff);
       return { success: true, user: demoStaff };
     }
-    if (password === 'iitd2024' && email.includes('@')) {
+    if (password === 'pulse2024' && email.includes('@')) {
       const user = { email, name: email.split('@')[0], role: 'staff', department };
       this.resetAttempts();
       Session.login(user);

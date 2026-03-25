@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../../css/shared.css"/>
 <script src="../../js/shared.js" defer></script>
 <script src="../../js/auth.js" defer></script>
+<script src="../../js/demo-data.js" defer></script>
 <script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#570000","primary-container":"#800000","on-primary":"#ffffff","on-primary-container":"#ff8371","secondary":"#00629d","secondary-container":"#00a2fd","on-secondary":"#ffffff","on-secondary-container":"#003558","tertiary":"#18283c","tertiary-container":"#2e3e53","on-tertiary":"#ffffff","on-tertiary-container":"#99a9c2","surface":"#f7f9fb","surface-container":"#eceef0","surface-container-low":"#f2f4f6","surface-container-lowest":"#ffffff","surface-container-high":"#e6e8ea","surface-container-highest":"#e0e3e5","on-surface":"#191c1e","on-surface-variant":"#5a413d","outline":"#8e706c","outline-variant":"#e2bfb9","error":"#ba1a1a","error-container":"#ffdad6","on-error":"#ffffff","on-error-container":"#93000a","primary-fixed":"#ffdad4","secondary-fixed":"#cfe5ff","inverse-surface":"#2d3133","surface-tint":"#b22b1d","surface-dim":"#d8dadc","surface-bright":"#f7f9fb","tertiary-fixed":"#d3e4fe","surface-variant":"#e0e3e5"},fontFamily:{"headline":["Manrope"],"body":["Inter"],"label":["Inter"]},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}}}}</script>
 <style>.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}</style>
 </head>
@@ -59,7 +60,7 @@
                 <div class="flex items-center gap-3"><input type="checkbox" class="text-secondary focus:ring-secondary rounded"/><span class="text-sm"><strong>Amoxicillin 250mg</strong> — 1-1-1 × 5 days</span><span class="text-xs text-secondary font-bold bg-secondary/10 px-2 py-0.5 rounded">In Stock</span></div>
               </div>
               <div class="flex gap-3">
-                <button onclick="this.closest('.bg-surface-container-lowest').style.opacity='0.3';Toast.show('Prescription dispensed! SMS sent to Arnav Kumar.','success')" class="px-6 py-3 bg-primary text-white rounded-xl font-bold flex items-center gap-2 active:scale-95 transition-all shadow-lg shadow-primary/20"><span class="material-symbols-outlined">check_circle</span>Dispense & Notify</button>
+                <button onclick="this.closest('.bg-surface-container-lowest').style.opacity='0.3'; NotifSim.sendPrescriptionReady('Arnav Kumar');" class="px-6 py-3 bg-primary text-white rounded-xl font-bold flex items-center gap-2 active:scale-95 transition-all shadow-lg shadow-primary/20"><span class="material-symbols-outlined">check_circle</span>Dispense & Notify</button>
                 <button class="px-6 py-3 bg-surface-container-high text-on-surface-variant rounded-xl font-bold flex items-center gap-2 hover:bg-surface-dim transition-colors"><span class="material-symbols-outlined">visibility</span>Full Record</button>
               </div>
             </div>

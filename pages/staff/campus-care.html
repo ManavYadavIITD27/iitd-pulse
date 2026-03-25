@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../../css/shared.css"/>
 <script src="../../js/shared.js" defer></script>
 <script src="../../js/auth.js" defer></script>
+<script src="../../js/demo-data.js" defer></script>
 <script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#570000","primary-container":"#800000","on-primary":"#ffffff","on-primary-container":"#ff8371","secondary":"#00629d","secondary-container":"#00a2fd","on-secondary":"#ffffff","on-secondary-container":"#003558","tertiary":"#18283c","tertiary-container":"#2e3e53","on-tertiary":"#ffffff","on-tertiary-container":"#99a9c2","surface":"#f7f9fb","surface-container":"#eceef0","surface-container-low":"#f2f4f6","surface-container-lowest":"#ffffff","surface-container-high":"#e6e8ea","surface-container-highest":"#e0e3e5","on-surface":"#191c1e","on-surface-variant":"#5a413d","outline":"#8e706c","outline-variant":"#e2bfb9","error":"#ba1a1a","error-container":"#ffdad6","on-error":"#ffffff","on-error-container":"#93000a","primary-fixed":"#ffdad4","secondary-fixed":"#cfe5ff","secondary-fixed-dim":"#98cbff","inverse-surface":"#2d3133","surface-tint":"#b22b1d","surface-dim":"#d8dadc","surface-bright":"#f7f9fb","tertiary-fixed":"#d3e4fe","tertiary-fixed-dim":"#b7c8e1","surface-variant":"#e0e3e5"},fontFamily:{"headline":["Manrope"],"body":["Inter"],"label":["Inter"]},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}}}}</script>
 <style>.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}</style>
 </head>
@@ -63,7 +64,7 @@
               </div>
 
               <div class="flex gap-3">
-                <button onclick="Toast.show('Ticket #8840 assigned to Electrical dept. Response team dispatched. SMS sent to reporter.','success')" class="px-5 py-3 bg-error text-white rounded-xl font-bold text-sm flex items-center gap-2 active:scale-95 transition-all"><span class="material-symbols-outlined text-base">send</span>Dispatch & Notify</button>
+                <button onclick="NotifSim.sendComplaintUpdate('#8840', 'Electrical team dispatched to Nilgiri hostel.')" class="px-5 py-3 bg-error text-white rounded-xl font-bold text-sm flex items-center gap-2 active:scale-95 transition-all"><span class="material-symbols-outlined text-base">send</span>Dispatch & Notify</button>
                 <button class="px-5 py-3 bg-surface-container-high text-on-surface-variant rounded-xl font-bold text-sm flex items-center gap-2"><span class="material-symbols-outlined text-base">schedule</span>Set Timeline</button>
               </div>
             </div>
