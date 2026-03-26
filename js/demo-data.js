@@ -174,6 +174,9 @@ const NotifSim = {
 
   // Convenience methods
   sendAppointmentConfirmation(doctorName, time) {
+    if (typeof DB !== 'undefined') {
+      DB.addEngagement('medical', doctorName, 'Tomorrow at ' + time + ' · IITD Hospital', 'event', 'error');
+    }
     Toast.show('Appointment confirmed! SMS & Email sent.', 'success');
     setTimeout(() => {
       this.show('sms', {
@@ -194,6 +197,9 @@ const NotifSim = {
   },
 
   sendComplaintUpdate(ticketId, status) {
+    if (typeof DB !== 'undefined') {
+       // Optional: Could update DB here if we track statuses
+    }
     Toast.show(`Ticket ${ticketId} — ${status}`, 'success');
     setTimeout(() => {
       this.show('sms', {
