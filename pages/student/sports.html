@@ -83,11 +83,11 @@
       <div class="flex justify-between items-end mb-8">
         <div><h2 class="text-3xl font-black font-headline tracking-tighter text-primary">Live Facilities</h2><p class="text-slate-500">Real-time occupancy and slot availability</p></div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="facilities">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6" id="facilities">
         <!-- Football -->
         <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive">
           <div class="h-32 rounded-2xl overflow-hidden relative">
-            <img alt="Football" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvbeyAVtAvJJD6DccyGefBsiSGke4mIObASpJ9q4ieNxWwTW6jssezhqA2n52vcfQ0jaO8O_UBwPTTMCbFpcVjHh0L7Jmru6LOm_9BgyTAUkxjUMk5Kf-GFFauu6MnoS67vfoRUO-tJ1SZGJ3mnQqBw5CSxYdSkzb6i1BND_mqIFQa75Vuc8wbk1clMr1QbVIY3gws0yn9g9HTTsOCZr-vjd4RinwEZtjxpxvEMwXEUcjSdRMwMxHJF51Ukr9uPoTx8mvaaWAL5Enf"/>
+            <img alt="Football" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1518605308466-9b6d859a0fef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"/>
             <div class="absolute top-3 right-3 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold">AVAILABLE</div>
           </div>
           <div class="flex-1">
@@ -97,7 +97,7 @@
           <div class="mt-auto border-t border-slate-100 pt-4">
             <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-slate-400">NEXT SLOTS</span></div>
             <div class="flex flex-wrap gap-2">
-              <button onclick="NotifSim.sendBookingConfirmation('Football Arena', '4:00 – 6:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">4:00 PM</button>
+              <button onclick="openFacilityModal('Main Football Arena', '4:00 – 6:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">4:00 PM</button>
               <button class="flex-1 py-2 bg-slate-100 text-slate-400 font-bold text-sm rounded-lg cursor-not-allowed">6:00 PM</button>
             </div>
           </div>
@@ -116,7 +116,7 @@
           <div class="mt-auto border-t border-slate-100 pt-4">
             <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-slate-400">NEXT SLOTS</span></div>
             <div class="flex flex-wrap gap-2">
-              <button onclick="NotifSim.sendBookingConfirmation('Cricket Oval', '5:00 – 7:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">5:00 PM</button>
+              <button onclick="openFacilityModal('Cricket Oval', '5:00 – 7:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">5:00 PM</button>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@
         <!-- Tennis -->
         <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive">
           <div class="h-32 rounded-2xl overflow-hidden relative">
-            <img alt="Tennis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADiTgdxSl3fGY4Wl_riPlGUkf1fKFlu5TZtM5W15_dLJ4wldLq16oC9_ce9naH5BAqzIFuR0Hydaz8q6oYa4WxKaqfVL6MgRueeWP530kbZnY6qKoXdOZuAjeyDdssaT4oEejzoA2lOs7GLhc3hm3uAZ24_MARzos1Yvj67wwFCG2mVCqmF6S5B9dxjBKS8c8Wsdt2Riz5i5JdymB9spNXe9DI5oiyIxJGlym2v0-3dFHMMiNQnTbHccy4YdaRillhGpQ1DTbOyDnc"/>
+            <img alt="Tennis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"/>
             <div class="absolute top-3 right-3 bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold">2 LEFT</div>
           </div>
           <div class="flex-1">
@@ -134,8 +134,45 @@
           <div class="mt-auto border-t border-slate-100 pt-4">
             <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-slate-400">NEXT SLOTS</span></div>
             <div class="flex flex-wrap gap-2">
-              <button onclick="NotifSim.sendBookingConfirmation('Tennis Court 2', '6:30 – 7:30 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">6:30 PM (C2)</button>
-              <button onclick="NotifSim.sendBookingConfirmation('Tennis Court 4', '7:30 – 8:30 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">7:30 PM (C4)</button>
+              <button onclick="openFacilityModal('Tennis Court 2', '6:30 – 7:30 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-xs rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">6:30 PM (C2)</button>
+              <button onclick="openFacilityModal('Tennis Court 4', '7:30 – 8:30 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-xs rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">7:30 PM (C4)</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Basketball -->
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive">
+          <div class="h-32 rounded-2xl overflow-hidden relative">
+            <img alt="Basketball" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"/>
+            <div class="absolute top-3 right-3 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold">AVAILABLE</div>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold font-headline text-lg">Basketball Courts</h3>
+            <p class="text-xs text-slate-500">Outdoor Wooden Floor</p>
+          </div>
+          <div class="mt-auto border-t border-slate-100 pt-4">
+            <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-slate-400">NEXT SLOTS</span></div>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="openFacilityModal('Basketball Court B', '5:00 – 6:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">5:00 PM</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badminton -->
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive">
+          <div class="h-32 rounded-2xl overflow-hidden relative">
+            <img alt="Badminton" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"/>
+            <div class="absolute top-3 right-3 bg-error text-white px-3 py-1 rounded-full text-[10px] font-bold">HIGH DEMAND</div>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold font-headline text-lg">Badminton Hub</h3>
+            <p class="text-xs text-slate-500">Indoor SAC Courts</p>
+          </div>
+          <div class="mt-auto border-t border-slate-100 pt-4">
+            <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-slate-400">NEXT SLOTS</span></div>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="openFacilityModal('Badminton Court 3', '8:00 – 9:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-xs rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">8:00 PM (C3)</button>
+              <button class="flex-1 py-2 bg-slate-100 text-slate-400 font-bold text-xs rounded-lg cursor-not-allowed">9:00 PM (C1)</button>
             </div>
           </div>
         </div>
@@ -153,24 +190,23 @@
           <div class="mt-auto border-t border-slate-100 pt-4">
             <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-slate-400">TODAY</span></div>
             <div class="flex flex-wrap gap-2">
-              <button onclick="NotifSim.sendBookingConfirmation('Olympic Pool', '6:00 – 7:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">6:00 PM</button>
+              <button onclick="openFacilityModal('Olympic Pool', '6:00 – 7:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">6:00 PM</button>
             </div>
           </div>
         </div>
 
         <!-- Table Tennis -->
-        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive md:col-span-2 xl:col-span-4 flex-row items-center">
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive md:col-span-2 xl:col-span-2 flex-row items-center">
           <div class="w-48 h-32 rounded-2xl overflow-hidden relative shrink-0 hidden md:block">
             <img alt="Table Tennis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1609710228159-0fa9d10e0aa8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"/>
-            <div class="absolute top-2 right-2 bg-error text-white px-2 py-0.5 rounded-full text-[8px] font-bold">HIGH DEMAND</div>
           </div>
           <div class="flex-1">
             <h3 class="font-bold font-headline text-xl">Table Tennis Hall</h3>
             <p class="text-sm text-slate-500 mb-4">Tables 1-6 (Indoor Sports Center)</p>
             <div class="flex flex-wrap gap-3">
-              <button onclick="NotifSim.sendBookingConfirmation('TT Hall - Table #2', '5:00 – 6:00 PM')" class="px-6 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">Table 2 (5:00 PM)</button>
-              <button class="px-6 py-2 bg-slate-100 text-slate-400 font-bold text-sm rounded-lg cursor-not-allowed">Table 1 (Booked)</button>
-              <button class="px-6 py-2 bg-slate-100 text-slate-400 font-bold text-sm rounded-lg cursor-not-allowed">Table 3 (Booked)</button>
+              <button onclick="openFacilityModal('TT Hall - Table #2', '5:00 – 6:00 PM')" class="px-6 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">Table 2 (5:00 PM)</button>
+              <button class="px-4 py-2 bg-slate-100 text-slate-400 font-bold text-xs rounded-lg cursor-not-allowed">Tb 1 (Bkd)</button>
+              <button class="px-4 py-2 bg-slate-100 text-slate-400 font-bold text-xs rounded-lg cursor-not-allowed">Tb 3 (Bkd)</button>
             </div>
           </div>
         </div>
@@ -183,48 +219,92 @@
         <h2 class="text-2xl font-black font-headline tracking-tighter text-primary mb-2">Equipment Rental</h2>
         <p class="text-sm text-slate-500 mb-6 max-w-2xl">Skip the line! Reserve your equipment here and scan your IITD ID card at the front desk to pick it up. All equipment rentals are free for verified students.</p>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <!-- Item 1 -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="Toast.show('Football reserved! Pick up at the front desk using your ID.','success')">
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="openRentalModal('Football')">
             <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
               <span class="material-symbols-outlined">sports_soccer</span>
             </div>
             <h4 class="font-bold font-headline text-lg">Football</h4>
             <div class="flex justify-between items-center mt-2">
-              <span class="text-xs font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md">8 Available</span>
+              <span class="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md uppercase tracking-wider">8 Available</span>
               <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">add_circle</span>
             </div>
           </div>
           <!-- Item 2 -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="Toast.show('Wilson Pro Racket reserved! Pick up at the front desk using your ID.','success')">
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="openRentalModal('Tennis Racket')">
              <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
               <span class="material-symbols-outlined">sports_tennis</span>
             </div>
             <h4 class="font-bold font-headline text-lg">Tennis Racket</h4>
             <div class="flex justify-between items-center mt-2">
-              <span class="text-xs font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md">12 Available</span>
+              <span class="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md uppercase tracking-wider">12 Available</span>
               <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">add_circle</span>
             </div>
           </div>
           <!-- Item 3 -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="Toast.show('Table Tennis Bat reserved! Pick up at the front desk using your ID.','success')">
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="openRentalModal('Table Tennis Bat')">
             <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
               <span class="material-symbols-outlined">sports_score</span>
             </div>
             <h4 class="font-bold font-headline text-lg">TT Bat</h4>
             <div class="flex justify-between items-center mt-2">
-              <span class="text-xs font-bold text-error bg-error/10 px-2 py-1 rounded-md">2 Available</span>
+              <span class="text-[10px] font-bold text-error bg-error/10 px-2 py-1 rounded-md uppercase tracking-wider">2 Available</span>
               <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">add_circle</span>
             </div>
           </div>
           <!-- Item 4 -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="Toast.show('Cricket Kit reserved! Pick up at the front desk using your ID.','success')">
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="openRentalModal('Cricket Kit')">
             <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
               <span class="material-symbols-outlined">sports_cricket</span>
             </div>
             <h4 class="font-bold font-headline text-lg">Cricket Kit</h4>
             <div class="flex justify-between items-center mt-2">
-              <span class="text-xs font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md">5 Available</span>
+              <span class="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md uppercase tracking-wider">5 Available</span>
+              <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">add_circle</span>
+            </div>
+          </div>
+          <!-- Item 5 -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="openRentalModal('Basketball')">
+            <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined">sports_basketball</span>
+            </div>
+            <h4 class="font-bold font-headline text-lg">Basketball</h4>
+            <div class="flex justify-between items-center mt-2">
+              <span class="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md uppercase tracking-wider">6 Available</span>
+              <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">add_circle</span>
+            </div>
+          </div>
+          <!-- Item 6 -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="openRentalModal('Volleyball')">
+            <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined">sports_volleyball</span>
+            </div>
+            <h4 class="font-bold font-headline text-lg">Volleyball</h4>
+            <div class="flex justify-between items-center mt-2">
+              <span class="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md uppercase tracking-wider">4 Available</span>
+              <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">add_circle</span>
+            </div>
+          </div>
+          <!-- Item 7 -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="openRentalModal('Badminton Racket')">
+            <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined">sports_tennis</span>
+            </div>
+            <h4 class="font-bold font-headline text-lg">Badminton Rkt</h4>
+            <div class="flex justify-between items-center mt-2">
+              <span class="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md uppercase tracking-wider">10 Available</span>
+              <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">add_circle</span>
+            </div>
+          </div>
+          <!-- Item 8 -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-interactive group cursor-pointer" onclick="openRentalModal('Yoga Mat')">
+            <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined">sports_gymnastics</span>
+            </div>
+            <h4 class="font-bold font-headline text-lg">Yoga Mat</h4>
+            <div class="flex justify-between items-center mt-2">
+              <span class="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md uppercase tracking-wider">15 Available</span>
               <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">add_circle</span>
             </div>
           </div>
@@ -233,6 +313,107 @@
     </section>
   </main>
 </div>
+
+<!-- Modals -->
+<div id="facility-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('facility-modal')"></div>
+  <div class="bg-surface w-full max-w-md p-6 lg:p-8 rounded-3xl z-10 shadow-2xl relative border border-white/10 scale-95 opacity-0 transition-all duration-300" id="fm-dialog">
+    <button onclick="closeModal('facility-modal')" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-primary transition-colors bg-slate-100 rounded-full"><span class="material-symbols-outlined">close</span></button>
+    <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-4"><span class="material-symbols-outlined">event_available</span></div>
+    <h3 class="text-2xl font-black font-headline text-primary mb-1">Confirm Booking</h3>
+    <p class="text-slate-500 text-sm mb-6">You are about to secure a slot for <strong id="fm-name" class="text-on-surface">Facility</strong> at <strong id="fm-time" class="text-on-surface">Time</strong>.</p>
+    
+    <div class="space-y-4 mb-8">
+       <div class="flex justify-between items-center p-4 bg-surface-container-lowest rounded-xl border border-slate-100"><span class="text-sm font-bold text-slate-500">Authorized Link</span><span class="text-xs font-bold bg-secondary/10 text-secondary px-2 py-1 rounded">Student ID</span></div>
+       <div class="flex justify-between items-center p-4 bg-surface-container-lowest rounded-xl border border-slate-100"><span class="text-sm font-bold text-slate-500">Cost</span><span class="text-sm font-bold text-primary">₹0.00 (Free)</span></div>
+    </div>
+
+    <div class="flex gap-3">
+      <button onclick="closeModal('facility-modal')" class="flex-1 py-3 text-slate-500 font-bold hover:bg-slate-100 rounded-xl transition-colors">Cancel</button>
+      <button onclick="confirmFacility()" class="flex-[2] py-3 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/30 hover:shadow-primary/50 active:scale-95 transition-all">Yes, Book Slot</button>
+    </div>
+  </div>
+</div>
+
+<div id="rental-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('rental-modal')"></div>
+  <div class="bg-surface w-full max-w-md p-6 lg:p-8 rounded-3xl z-10 shadow-2xl relative border border-white/10 scale-95 opacity-0 transition-all duration-300" id="rm-dialog">
+    <button onclick="closeModal('rental-modal')" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-primary transition-colors bg-slate-100 rounded-full"><span class="material-symbols-outlined">close</span></button>
+    <div class="w-12 h-12 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mb-4"><span class="material-symbols-outlined">shopping_cart_checkout</span></div>
+    <h3 class="text-2xl font-black font-headline text-primary mb-1" id="rm-item">Equipment</h3>
+    <p class="text-slate-500 text-sm mb-6">Configure your rental session. Valid IITD ID required at pickup.</p>
+    
+    <form onsubmit="event.preventDefault(); confirmRental();" class="space-y-4 mb-8">
+       <div class="space-y-1">
+         <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Duration</label>
+         <select class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-secondary focus:border-secondary transition-all font-semibold text-sm">
+           <option>1 Hour</option><option>2 Hours</option><option>4 Hours (Half Day)</option><option>24 Hours (Full Day)</option>
+         </select>
+       </div>
+       <div class="space-y-1">
+         <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Pickup & Return Location</label>
+         <select class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-secondary focus:border-secondary transition-all font-semibold text-sm">
+           <option>SAC Main Front Desk</option><option>Indoor Sports Center</option><option>Athletics Track Store</option>
+         </select>
+       </div>
+       <div class="flex justify-between items-center p-3 mt-4 bg-tertiary text-on-tertiary rounded-xl"><span class="text-xs font-bold">Total Fee</span><span class="text-sm font-bold">₹0.00</span></div>
+       
+      <div class="flex gap-3 pt-4 border-t border-slate-100 mt-6">
+        <button type="button" onclick="closeModal('rental-modal')" class="flex-1 py-3 text-slate-500 font-bold hover:bg-slate-100 rounded-xl transition-colors">Cancel</button>
+        <button type="submit" class="flex-[2] py-3 bg-secondary text-white font-bold rounded-xl shadow-lg shadow-secondary/30 hover:shadow-secondary/50 active:scale-95 transition-all">Confirm Rental</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  let activeFacility = '';
+  let activeTime = '';
+  let activeRental = '';
+  
+  function openFacilityModal(name, time) {
+    activeFacility = name; activeTime = time;
+    document.getElementById('fm-name').innerText = name;
+    document.getElementById('fm-time').innerText = time;
+    const modal = document.getElementById('facility-modal');
+    const dialog = document.getElementById('fm-dialog');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    // Animate in
+    setTimeout(() => { dialog.classList.remove('scale-95', 'opacity-0'); }, 10);
+  }
+  
+  function openRentalModal(item) {
+    activeRental = item;
+    document.getElementById('rm-item').innerText = item;
+    const modal = document.getElementById('rental-modal');
+    const dialog = document.getElementById('rm-dialog');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    // Animate in
+    setTimeout(() => { dialog.classList.remove('scale-95', 'opacity-0'); }, 10);
+  }
+  
+  function closeModal(id) {
+    const dialog = document.getElementById(id === 'facility-modal' ? 'fm-dialog' : 'rm-dialog');
+    dialog.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      document.getElementById(id).classList.add('hidden');
+      document.getElementById(id).classList.remove('flex');
+    }, 300);
+  }
+  
+  function confirmFacility() {
+    closeModal('facility-modal');
+    // Call existing NotifSim to show toast and notification
+    NotifSim.sendBookingConfirmation(activeFacility, activeTime);
+  }
+  
+  function confirmRental() {
+    closeModal('rental-modal');
+    Toast.show(activeRental + ' reserved! Check your registered email for pickup details.', 'success');
+  }
+</script>
 
 <nav class="bottom-nav glass">
   <a href="hub.html"><span class="material-symbols-outlined">dashboard</span><span>Hub</span></a>
