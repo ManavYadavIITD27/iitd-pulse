@@ -165,4 +165,18 @@ function relativeTime(timestamp) {
 document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initMobileSidebar();
+
+  // Inject Global Interactive Particles (Moving Dots) on inner pages
+  if (!window.location.pathname.includes('login.html')) {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'global-particles';
+    canvas.className = 'fixed inset-0 pointer-events-none z-[-1] opacity-0 transition-opacity duration-1000';
+    document.body.prepend(canvas);
+    
+    // Light mode inner pages get a dark red (primary color #570000) low-opacity particle
+    initParticles('global-particles', 'rgba(87, 0, 0, 0.05)');
+    
+    // Fade in gracefully
+    setTimeout(() => canvas.classList.remove('opacity-0'), 300);
+  }
 });

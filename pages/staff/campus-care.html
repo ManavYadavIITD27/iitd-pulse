@@ -123,12 +123,67 @@
               <option>Select Ticket #</option><option>Ticket #8840 — Power Outage</option><option>Ticket #8841 — Food Quality</option>
             </select>
             <textarea class="w-full bg-white/10 border border-white/20 text-white rounded-xl py-3 px-4 text-sm focus:ring-secondary placeholder:text-white/40" rows="3" placeholder="Update message for reporter..."></textarea>
-            <div class="flex gap-2">
-              <label class="flex items-center gap-2 text-xs"><input type="checkbox" checked class="rounded text-secondary focus:ring-secondary"/>SMS</label>
-              <label class="flex items-center gap-2 text-xs"><input type="checkbox" checked class="rounded text-secondary focus:ring-secondary"/>Email</label>
+            
+            <!-- Proof of Fix Upload -->
+            <div class="space-y-2">
+              <label class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-white/70">
+                <span>Proof of Fix (Optional)</span>
+                <span id="proof-status" class="text-secondary-fixed transition-opacity opacity-0 flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">check_circle</span> Attached</span>
+              </label>
+              <div id="proof-zone" onclick="document.getElementById('proof-upload').click()" class="border-2 border-dashed border-white/20 bg-white/5 rounded-xl p-6 text-center cursor-pointer hover:border-secondary-fixed hover:bg-white/10 transition-all relative overflow-hidden group">
+                <input type="file" id="proof-upload" class="hidden" accept="image/*" onchange="handleProofUpload(event)" />
+                <div id="proof-prompt" class="group-hover:scale-105 transition-transform duration-300">
+                  <span class="material-symbols-outlined text-3xl text-white/40 mb-1 block group-hover:text-secondary-fixed transition-colors">add_photo_alternate</span>
+                  <p class="text-xs font-bold text-white/80">Click or Drag Photo</p>
+                </div>
+                <!-- Preview -->
+                <div id="proof-preview" class="hidden absolute inset-0 bg-tertiary-container flex flex-col items-center justify-center p-3">
+                  <span class="material-symbols-outlined text-secondary-fixed text-2xl mb-1">image</span>
+                  <p class="text-xs font-bold text-white truncate w-full" id="proof-filename">proof.jpg</p>
+                  <button type="button" onclick="event.stopPropagation(); resetProof()" class="mt-2 text-[10px] font-bold text-white bg-white/20 px-3 py-1 rounded-full hover:bg-error/80 transition-colors">Remove</button>
+                </div>
+              </div>
             </div>
-            <button onclick="Toast.show('Status update broadcast via SMS & Email!','success')" class="w-full py-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold text-sm active:scale-95 transition-all">Broadcast Update</button>
+
+            <div class="flex gap-2">
+              <label class="flex items-center gap-2 text-xs"><input type="checkbox" checked class="rounded bg-white/10 border-white/30 text-secondary focus:ring-secondary"/>SMS</label>
+              <label class="flex items-center gap-2 text-xs"><input type="checkbox" checked class="rounded bg-white/10 border-white/30 text-secondary focus:ring-secondary"/>Email</label>
+            </div>
+            <button onclick="Toast.show('Status update and Proof attached via SMS & Email!','success')" class="w-full py-3 bg-secondary-fixed text-on-secondary-fixed-variant rounded-xl font-bold text-sm active:scale-95 transition-all shadow-lg hover:shadow-secondary-fixed/50">Broadcast Update</button>
           </form>
+          
+          <script>
+            const proofZone = document.getElementById('proof-zone');
+            ['dragenter', 'dragover'].forEach(e => proofZone.addEventListener(e, ev => {
+              ev.preventDefault();
+              proofZone.classList.add('border-secondary-fixed', 'bg-white/10');
+            }));
+            ['dragleave', 'drop'].forEach(e => proofZone.addEventListener(e, ev => {
+              ev.preventDefault();
+              proofZone.classList.remove('border-secondary-fixed', 'bg-white/10');
+            }));
+            proofZone.addEventListener('drop', ev => {
+              const file = ev.dataTransfer.files[0];
+              if(file) applyProof(file);
+            });
+            function handleProofUpload(e) {
+              const file = e.target.files[0];
+              if(file) applyProof(file);
+            }
+            function applyProof(file) {
+              document.getElementById('proof-prompt').classList.add('hidden');
+              document.getElementById('proof-preview').classList.remove('hidden');
+              document.getElementById('proof-filename').innerText = file.name;
+              document.getElementById('proof-status').classList.remove('opacity-0');
+              Toast.show('Proof of Fix attached successfully.', 'success');
+            }
+            function resetProof() {
+              document.getElementById('proof-upload').value = '';
+              document.getElementById('proof-preview').classList.add('hidden');
+              document.getElementById('proof-prompt').classList.remove('hidden');
+              document.getElementById('proof-status').classList.add('opacity-0');
+            }
+          </script>
         </div>
 
         <!-- Analytics -->

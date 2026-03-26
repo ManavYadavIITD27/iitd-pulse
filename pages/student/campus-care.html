@@ -74,12 +74,72 @@
             <input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-secondary focus:ring-0 transition-all rounded-t-lg" placeholder="e.g. Nilgiri Hostel, Wing B, Room 204" type="text"/>
           </div>
           <div class="space-y-2">
-            <label class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Attach Photo</label>
-            <div class="border-2 border-dashed border-outline-variant/30 rounded-xl p-8 text-center cursor-pointer hover:border-secondary hover:bg-secondary/5 transition-all">
-              <span class="material-symbols-outlined text-4xl text-slate-300 mb-2 block">add_photo_alternate</span>
-              <p class="text-sm text-slate-400 font-medium">Click or drag to upload images</p>
+            <label class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant flex justify-between">
+              <span>Attach Photo Proof</span>
+              <span class="text-secondary opacity-0 transition-opacity font-bold flex items-center gap-1" id="upload-status"><span class="material-symbols-outlined text-sm">check_circle</span> Attached</span>
+            </label>
+            <div id="upload-zone" onclick="document.getElementById('file-upload').click()" class="border-2 border-dashed border-outline-variant/60 bg-surface-container-low rounded-xl p-8 text-center cursor-pointer hover:border-secondary hover:bg-secondary/5 transition-all relative overflow-hidden group">
+              <input type="file" id="file-upload" class="hidden" accept="image/*" onchange="handleSimulatedUpload(event)" />
+              <div id="upload-prompt" class="group-hover:scale-105 transition-transform duration-300">
+                <span class="material-symbols-outlined text-4xl text-slate-400 mb-2 block group-hover:text-secondary transition-colors">add_photo_alternate</span>
+                <p class="text-sm font-bold text-slate-600">Click or Drag photo here</p>
+                <p class="text-xs text-slate-400 mt-1">JPEG, PNG up to 10MB</p>
+              </div>
+              <div id="upload-preview" class="hidden absolute inset-0 bg-surface-container-highest flex flex-col items-center justify-center p-4">
+                <span class="material-symbols-outlined text-secondary text-4xl mb-2">image</span>
+                <p class="text-sm font-bold text-on-surface truncate w-full" id="upload-filename">photo.jpg</p>
+                <p class="text-xs text-slate-500 mb-2" id="upload-size">1.2 MB</p>
+                <button type="button" onclick="event.stopPropagation(); resetUpload()" class="text-xs font-bold text-error bg-error-container px-4 py-1.5 rounded-full hover:bg-error/20 transition-colors">Remove File</button>
+              </div>
             </div>
           </div>
+          <script>
+            const dropZone = document.getElementById('upload-zone');
+            
+            // Highlight on drag
+            ['dragenter', 'dragover'].forEach(e => dropZone.addEventListener(e, ev => {
+              ev.preventDefault();
+              dropZone.classList.add('border-secondary', 'bg-secondary/10');
+            }));
+            
+            // Remove highlight on leave
+            ['dragleave', 'drop'].forEach(e => dropZone.addEventListener(e, ev => {
+              ev.preventDefault();
+              dropZone.classList.remove('border-secondary', 'bg-secondary/10');
+            }));
+            
+            // Handle drop
+            dropZone.addEventListener('drop', ev => {
+              const file = ev.dataTransfer.files[0];
+              if(file) simulateUpload(file);
+            });
+
+            // Handle click upload
+            function handleSimulatedUpload(e) {
+              const file = e.target.files[0];
+              if(file) simulateUpload(file);
+            }
+
+            function simulateUpload(file) {
+              document.getElementById('upload-prompt').classList.add('hidden');
+              document.getElementById('upload-preview').classList.remove('hidden');
+              document.getElementById('upload-filename').innerText = file.name;
+              document.getElementById('upload-size').innerText = (file.size / (1024*1024)).toFixed(2) + ' MB';
+              
+              // Show status
+              const status = document.getElementById('upload-status');
+              status.classList.remove('opacity-0');
+              
+              Toast.show('Photo attached successfully.', 'success');
+            }
+
+            function resetUpload() {
+              document.getElementById('file-upload').value = '';
+              document.getElementById('upload-preview').classList.add('hidden');
+              document.getElementById('upload-prompt').classList.remove('hidden');
+              document.getElementById('upload-status').classList.add('opacity-0');
+            }
+          </script>
           <div class="flex items-center gap-4 pt-4">
             <button type="submit" onclick="Toast.show('Report submitted! Ticket #8843 created. You will receive SMS & Email updates within 1 hour.','success')" class="flex-1 bg-primary text-on-primary py-4 rounded-lg font-headline font-bold tracking-tight hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/20">Submit Formal Report</button>
             <button class="p-4 rounded-lg border-2 border-primary text-primary hover:bg-primary/5 transition-colors" type="button"><span class="material-symbols-outlined">attachment</span></button>
