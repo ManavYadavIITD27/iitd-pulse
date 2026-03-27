@@ -1,89 +1,44 @@
-# IITD Pulse — System Architecture & Application Context
+# IITD Pulse — Product & User Experience Document
 
-*This document is designed to provide comprehensive context to any AI, developer, or stakeholder analyzing the IITD Pulse platform. It details the problem statement, functional modules, and the bespoke technical architecture of the application.*
-
----
-
-## 1. The Problem Statement
-Indian Institute of Technology Delhi (IITD) students and staff frequently engage with multiple isolated campus services: health centers, sports complexes, and infrastructure maintenance (Campus Care). Historically, these systems are disconnected, requiring forms, physical visits, or emails. 
-
-**The Objective:** To build a centralized, zero-friction, mobile-first Web Application ("IITD Pulse") that unified all major campus quality-of-life services into a single, cohesive dashboard using extremely lightweight, serverless technology.
+*This document outlines the core business logic, the problem statement, and the exact user journey of the IITD Pulse platform. It explores why the platform was built and how it solves real-world campus inefficiencies through modern technology.*
 
 ---
 
-## 2. What the Application Is & What It Does
-**IITD Pulse** is a fully responsive, static-hosted Web Application built for the IIT Delhi campus. It serves two distinct user bases: **Students** (who consume services and make requests) and **Staff** (who manage, approve, and resolve those requests).
-
-### Core Capabilities:
-- **Universal Dashboard Tracking:** Students have a centralized "Hub" where their upcoming doctor appointments, reserved tennis courts, and active maintenance tickets are tracked dynamically in real-time.
-- **Medical/Hospital Portal:** Real-time filtering, searching, and booking of highly specialized doctors (Psychiatrists, Dermatologists, General Physicians) complete with AI-generated photorealistic portraits.
-- **Athletics/Sports Portal:** A massive interactive grid to book specific sports facilities (Football pitches, Badminton courts) or rent physical equipment via a zero-cost checkout flow.
-- **Campus Care Protocol:** A specialized reporting tool allowing students to drop-pin infrastructure issues (e.g., broken ACs, plumbing leaks) with photo attachments, triggering a live timeline ticket system.
+## 1. What is IITD Pulse?
+IITD Pulse is a unified digital ecosystem designed exclusively for the students and staff of the Indian Institute of Technology Delhi (IITD). It acts as a single, centralized smart-portal that connects all major campus quality-of-life services into one seamless mobile application.
 
 ---
 
-## 3. Technical Architecture & Data Flow
-Because the application is hosted natively on **GitHub Pages**, it lacks a traditional Node.js/Python server. To overcome this, the application uses a highly innovative **Two-Part Serverless Persistence Architecture**:
+## 2. The Problem Statement (Why do we need this?)
+Currently, campus life suffers from highly fragmented and disjointed service systems. 
+- **The Core Problem:** Students are forced to navigate completely disconnected systems, sign physical paper ledgers, or send emails just to book a doctor, reserve a tennis court, or report a broken AC in their hostel. This massive friction leads to delayed medical care, underutilized sports facilities, and severe inefficiencies in infrastructure repair.
+- **The Consequence:** Staff members are overwhelmed with tracking manual requests, and students waste tremendous amounts of time navigating bureaucracy instead of focusing on their academics.
 
-### A. The Frontend Logic & State Management (`js/db.js`)
-- **Vanilla JavaScript & TailwindCSS:** The application avoids bloated frameworks like React or Angular to prioritize sheer speed, relying on raw JS and Tailwind utility classes.
-- **Local Storage State Manager (`db.js`):** A custom library acts as a pseudo-NoSQL database within the browser. Whenever a student books a facility or files a complaint, `db.js` securely catches the action, reformats it, and caches it in local memory so the user retains their dashboard state perfectly across browser refreshes.
+---
 
-### B. The Cloud Backend (`backend/PulseDB.gs`)
-- **Google Apps Script NoSQL Proxy:** To allow data synchronization globally across varying devices (mobile phones, laptops), the app connects to a `PulseDB.gs` file deployed on Google Apps Script. 
-- **How it Works:** The Google Script acts as an enterprise-grade NoSQL router. It intercepts JSON actions from the GitHub frontend (`INSERT`, `DELETE`) and natively manipulates a literal Google Spreadsheet as its database core. 
-- **Concurrency Protected:** It utilizes Google's `LockService`. If 50 students attempt to book a facility at the same millisecond, the backend logically queues the requests to prevent "Last-Writer-Wins" overwrite collisions.
-- **Infinite Flexibility:** The backend enforces no strict schemas. The entire database is stored as a single parsed JSON string in Cell A1 of the Spreadsheet. This guarantees that any AI or future developer can add entirely new features (like a payment gateway or user roles) directly from the GitHub frontend without ever needing to modify the backend database router.
+## 3. The Solution (How technology fixes it)
+IITD Pulse eliminates this fragmentation by bringing every single service under one digital roof. By leveraging lightning-fast web technology, the platform gives students real-time access to facility availability, instant maintenance reporting, and immediate doctor scheduling directly from their smartphones. This allows campus staff to receive perfectly organized, digital tickets rather than messy hand-written forms.
 
 ---
 
 ## 4. In-Depth Screen-by-Screen Breakdown
 
-### A. The Authentication Layer (`/pages/student/login.html` & `/staff/login.html`)
-**What it does:** The primary secure entryway to the platform.
-**Features & Interactions:**
-- **Magic Link Simulation:** Instead of complex passwords, the login portal utilizes an ultra-modern authentication UI with particle backgrounds where users simply enter their IITD email, simulating a Magic Link process.
-- **Role Isolation:** Staff and Students have physically distinct login portals. The `auth.js` controller provisions mock JWT tokens locally based on the entry point granting distinct UI access.
+### A. The Secure Entryway (Login Portal)
+- **The Problem it solves:** Students often struggle to remember different passwords for different campus websites.
+- **What you can do here:** Users simply enter their official IITD email to gain instant access. The system automatically detects if the user is a Student or an Administrative Staff member and automatically routes them to their correct secure workspace.
 
-### B. The Command Center / Hub (`/pages/student/hub.html`)
-**What it does:** The centralized core of the application where a student gets a panoramic view of literally every action they have taken across the university.
-**Features & Interactions:**
-- **Dynamic Quick Links:** Four massive visual action cards exist to instantly jump to Hospital booking, Sports reservations, Mess tracking (mock), and Campus reporting.
-- **The "Active Board" (Database Driven):** Rather than static text, the main dashboard contains an active list of upcoming doctor appointments, reserved tennis courts, and pending maintenance tickets. 
-- **In-Line Cancellation:** Students can click the red 'Cancel' icon on any active booking. It triggers a JavaScript DOM removal micro-animation and atomic `DELETE` command into the `db.js` Local Storage, wiping the booking permanently from memory and cloud.
+### B. The Central Command Hub (Home Dashboard)
+- **The Problem it solves:** Students have no easy way to remember when their doctor appointment is or if their sports booking was actually confirmed.
+- **What you can do here:** This is the student's personal control room. At a single glance, they can see all of their upcoming medical appointments, reserved tennis courts, and pending maintenance tickets. If their daily schedule changes, they can instantly click the "Cancel" button on any booking, which immediately frees up the slot for another student across the campus.
 
-### C. The Medical / Hospital Screens (`/pages/student/hospital.html` & `/staff/pharmacy.html`)
-**What it does:** A comprehensive booking and filtering portal for campus physicians.
-**Features & Interactions:**
-- **Photorealistic AI Grid:** The student view displays 9 distinct, highly-specialized doctors represented by hyper-realistic generative AI portraits.
-- **Real-Time Live Filtering:** The UI includes a native Search Bar and a Department Dropdown (e.g., "Psychiatry", "Dermatology"). Typing into the search instantly filters the grid without page reloads using Vanilla JS DOM filtering.
-- **Appointment Booking & Database Injection:** Clicking "Book Appointment" opens a localized confirmation Toast. Under the hood, this simultaneously pushes an `INSERT` command to the `db.js` memory, allowing that specific doctor to instantly appear on the `hub.html` dashboard.
+### C. Health & Wellness Booking (Hospital Portal)
+- **The Problem it solves:** Finding an available specialist at the campus health center often requires physical visits, phone calls, and manual scheduling.
+- **What you can do here:** Students are presented with a clean, photorealistic grid of all available campus doctors. They can instantly filter the doctors by department (e.g., "Dermatology" or "Psychiatry") or search for a specific physician by name. With two simple clicks, they can lock in an available time slot for the next day, which immediately syncs back to their Central Hub.
 
-### D. The Athletics / Sports Screens (`/pages/student/sports.html` & `/staff/sports-admin.html`)
-**What it does:** A dual-purpose portal allowing students to book immovable facilities (like a Cricket pitch) or rent portable equipment (like Footballs).
-**Features & Interactions:**
-- **Zero-Friction Facility Workflow:** Students browse a grid of facilities (Badminton, Athletics, Swimming). Clicking "Book Slot" opens a slick Overlay Modal capturing Date and Time logic without navigating away.
-- **Equipment Checkout Modal:** Students can rent high-demand gear. The application removed all pricing models (Cost: ₹0.00) to act purely as an inventory logger. Renting gear injects a structured booking confirmation directly into the NoSQL pipeline, triggering a simulated confirmation SMS.
+### D. Athletics & Recreation (Sports Portal)
+- **The Problem it solves:** Sports facilities are often overbooked or underutilized because there is zero transparency on real-time availability. Furthermore, renting sports gear requires tedious paper sign-outs.
+- **What you can do here:** Students can browse a highly visual menu of all campus sports facilities (Badminton, Athletics, Swimming). They can check live availability and secure a time slot. Additionally, they can use the "Equipment Checkout" feature to digitally rent high-demand gear (like Footballs or TT Bats) for a few hours, automatically logging the inventory so the sports staff knows exactly who took what.
 
-### E. The Campus Care Reporting Screens (`/pages/student/campus-care.html` & `/staff/maintenance-report.html`)
-**What it does:** A highly specific infrastructure reporting ticket system. 
-**Features & Interactions:**
-- **Drag-and-Drop Image Attachments:** Students can describe a broken AC unit or plumbing leak and actively drag an image photo of the breakage into a customized "Drop Zone". 
-- **Ticket Generation:** On hitting submit, the UI resets and creates an `"iss_"` timestamped unique ticket ID. It generates a persistent database issue that appears across the student's Hub and theoretically on the Staff's management portal.
-- **Timeline Tracking:** The right column features a beautifully CSS-styled vertical Timeline showing precise steps of the repair (Problem Logged -> Department Assigned -> Solution in Progress) informing the user of resolution estimates.
-
----
-
-### `/js/`
-- `auth.js`: Handles session verification and mock JWT-style login tokens.
-- `shared.js`: Master controller for UI elements (Dynamic Particle Canvas backgrounds, Toast notifications, Modal states).
-- `db.js`: The most critical architectural file. Handles all asynchronous `fetch()` requests to the Google Apps Script and local memory state mapping.
-- `demo-data.js`: Provides simulated SMS/Email popup notifications when database events trigger correctly.
-
----
-
-## 5. How to Expand the Application (AI Instructions)
-If an AI agent is instructed to add a new feature to IITD Pulse in the future:
-1. **No Backend Adjustment Required:** Do *not* write code for `backend/PulseDB.gs`. The Google Script automatically handles any new JSON tables or arrays the frontend invents.
-2. **Use Database Methods:** Inject changes directly via `DB.syncAction('INSERT', 'new_table_name', { data })` found inside `js/db.js`.
-3. **Keep Tailwind Consistent:** Utilize the defined `primary`, `secondary`, and `surface-container` custom hex colors located in the `<script>` tailwind config block explicitly at the top of every HTML file for visual harmony.
+### E. Campus Care & Infrastructure (Maintenance Portal)
+- **The Problem it solves:** Reporting hostel breakages (like a leaking pipe or broken corridor light) usually requires hunting down a warden or filling out a grievance ledger, leading to severely delayed repairs.
+- **What you can do here:** Students can instantly file an urgent issue directly from their phone. They can select the exact broken department (e.g., Electrical, Plumbing), type in their specific hostel room, and even snap a photo of the breakage to attach as visual proof for the repairmen. Once submitted, they receive a unique Ticket ID and a live visual timeline tracking the repair progress from "Problem Logged" all the way to "Resolved".
