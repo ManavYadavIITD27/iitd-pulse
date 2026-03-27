@@ -37,17 +37,42 @@ Because the application is hosted natively on **GitHub Pages**, it lacks a tradi
 
 ---
 
-## 4. Application Parts / Directory Map
+## 4. In-Depth Screen-by-Screen Breakdown
 
-### `/pages/student/`
-- `login.html`: Secure student access portal utilizing micro-animations.
-- `hub.html`: The central nervous system showing dynamic "Active Bookings" and immediate action items perfectly synced from `db.js`.
-- `hospital.html`: Medical booking portal with active dropdown/search filtering.
-- `sports.html`: Athletics portal managing dual flows for Facility Booking and Equipment Rental via overlay modals.
-- `campus-care.html`: Issue reporting portal supporting drag-and-drop file proofs and ticket tracking.
+### A. The Authentication Layer (`/pages/student/login.html` & `/staff/login.html`)
+**What it does:** The primary secure entryway to the platform.
+**Features & Interactions:**
+- **Magic Link Simulation:** Instead of complex passwords, the login portal utilizes an ultra-modern authentication UI with particle backgrounds where users simply enter their IITD email, simulating a Magic Link process.
+- **Role Isolation:** Staff and Students have physically distinct login portals. The `auth.js` controller provisions mock JWT tokens locally based on the entry point granting distinct UI access.
 
-### `/pages/staff/`
-- Contains mirrored versions of the student portals but designed for administrative control (e.g., resolving tickets, issuing prescriptions, verifying equipment stocks).
+### B. The Command Center / Hub (`/pages/student/hub.html`)
+**What it does:** The centralized core of the application where a student gets a panoramic view of literally every action they have taken across the university.
+**Features & Interactions:**
+- **Dynamic Quick Links:** Four massive visual action cards exist to instantly jump to Hospital booking, Sports reservations, Mess tracking (mock), and Campus reporting.
+- **The "Active Board" (Database Driven):** Rather than static text, the main dashboard contains an active list of upcoming doctor appointments, reserved tennis courts, and pending maintenance tickets. 
+- **In-Line Cancellation:** Students can click the red 'Cancel' icon on any active booking. It triggers a JavaScript DOM removal micro-animation and atomic `DELETE` command into the `db.js` Local Storage, wiping the booking permanently from memory and cloud.
+
+### C. The Medical / Hospital Screens (`/pages/student/hospital.html` & `/staff/pharmacy.html`)
+**What it does:** A comprehensive booking and filtering portal for campus physicians.
+**Features & Interactions:**
+- **Photorealistic AI Grid:** The student view displays 9 distinct, highly-specialized doctors represented by hyper-realistic generative AI portraits.
+- **Real-Time Live Filtering:** The UI includes a native Search Bar and a Department Dropdown (e.g., "Psychiatry", "Dermatology"). Typing into the search instantly filters the grid without page reloads using Vanilla JS DOM filtering.
+- **Appointment Booking & Database Injection:** Clicking "Book Appointment" opens a localized confirmation Toast. Under the hood, this simultaneously pushes an `INSERT` command to the `db.js` memory, allowing that specific doctor to instantly appear on the `hub.html` dashboard.
+
+### D. The Athletics / Sports Screens (`/pages/student/sports.html` & `/staff/sports-admin.html`)
+**What it does:** A dual-purpose portal allowing students to book immovable facilities (like a Cricket pitch) or rent portable equipment (like Footballs).
+**Features & Interactions:**
+- **Zero-Friction Facility Workflow:** Students browse a grid of facilities (Badminton, Athletics, Swimming). Clicking "Book Slot" opens a slick Overlay Modal capturing Date and Time logic without navigating away.
+- **Equipment Checkout Modal:** Students can rent high-demand gear. The application removed all pricing models (Cost: ₹0.00) to act purely as an inventory logger. Renting gear injects a structured booking confirmation directly into the NoSQL pipeline, triggering a simulated confirmation SMS.
+
+### E. The Campus Care Reporting Screens (`/pages/student/campus-care.html` & `/staff/maintenance-report.html`)
+**What it does:** A highly specific infrastructure reporting ticket system. 
+**Features & Interactions:**
+- **Drag-and-Drop Image Attachments:** Students can describe a broken AC unit or plumbing leak and actively drag an image photo of the breakage into a customized "Drop Zone". 
+- **Ticket Generation:** On hitting submit, the UI resets and creates an `"iss_"` timestamped unique ticket ID. It generates a persistent database issue that appears across the student's Hub and theoretically on the Staff's management portal.
+- **Timeline Tracking:** The right column features a beautifully CSS-styled vertical Timeline showing precise steps of the repair (Problem Logged -> Department Assigned -> Solution in Progress) informing the user of resolution estimates.
+
+---
 
 ### `/js/`
 - `auth.js`: Handles session verification and mock JWT-style login tokens.
