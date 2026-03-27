@@ -29,16 +29,11 @@ const DB = {
     return JSON.parse(localStorage.getItem('pulse_issues')) || [];
   },
 
-  async syncToCloud() {
+  async syncAction(action, table, payload) {
     if (!this.CLOUD_URL) return;
-    const payload = JSON.stringify({
-      engagements: this.getEngagements(),
-      issues: this.getIssues(),
-      lastUpdated: Date.now()
-    });
     try {
       await fetch(this.CLOUD_URL, {
-        method: 'POST', body: JSON.stringify({ payload })
+        method: 'POST', body: JSON.stringify({ action, table, payload })
       });
     } catch(e) { console.warn('Cloud sync failed'); }
   },
@@ -61,30 +56,32 @@ const DB = {
 
   addEngagement(type, title, subtitle, icon = 'event', color = 'primary') {
     const list = this.getEngagements();
-    list.unshift({ id: 'eng_' + Date.now(), type, title, subtitle, icon, color, status: 'Confirmed' });
+    const item = { id: 'eng_' + Date.now(), type, title, subtitle, icon, color, status: 'Confirmed' };
+    list.unshift(item);
     localStorage.setItem('pulse_engagements', JSON.stringify(list));
-    this.syncToCloud();
+    this.syncAction('INSERT', 'engagements', item);
   },
 
   removeEngagement(id) {
     let list = this.getEngagements();
     list = list.filter(e => e.id !== id);
     localStorage.setItem('pulse_engagements', JSON.stringify(list));
-    this.syncToCloud();
+    this.syncAction('DELETE', 'engagements', { id });
   },
 
   addIssue(title, subtitle) {
     const list = this.getIssues();
-    list.unshift({ id: 'iss_' + Date.now(), status: 'In Progress', title, subtitle });
+    const item = { id: 'iss_' + Date.now(), status: 'In Progress', title, subtitle };
+    list.unshift(item);
     localStorage.setItem('pulse_issues', JSON.stringify(list));
-    this.syncToCloud();
+    this.syncAction('INSERT', 'issues', item);
   },
 
   removeIssue(id) {
     let list = this.getIssues();
     list = list.filter(e => e.id !== id);
     localStorage.setItem('pulse_issues', JSON.stringify(list));
-    this.syncToCloud();
+    this.syncAction('DELETE', 'issues', { id });
   }
 };
 

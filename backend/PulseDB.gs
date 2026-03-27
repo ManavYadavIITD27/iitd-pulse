@@ -1,19 +1,47 @@
 // backend/PulseDB.gs
-// Instructions:
-// 1. Go to script.google.com and open your existing project.
-// 2. Paste this updated code.
-// 3. Deploy > Manage Deployments > Edit (pencil icon) > New Version > Deploy.
-// 4. Your GitHub site will now securely have full remote control over the database schema.
 
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    const request = JSON.parse(e.postData.contents);
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const lock = LockService.getScriptLock();
     
-    // Overwrite Cell A1 tightly with the entire GitHub database JSON block
-    sheet.getRange(1, 1).setValue(data.payload);
+    // Protect against overlap: queues simultaneous bookings logically so no data is ever lost
+    lock.waitLock(3000); 
     
-    return ContentService.createTextOutput(JSON.stringify({ success: true }));
+    // Read current overarching database state
+    let dbString = sheet.getRange(1, 1).getValue();
+    let db = dbString ? JSON.parse(dbString) : {};
+
+    const action = request.action;      // 'INSERT', 'UPDATE', 'DELETE'
+    const table = request.table;        // e.g., 'engagements', 'users', 'auth'
+    const payload = request.payload;    // The JSON data
+
+    // Dynamically generate new tables if the GitHub code invents them in the future!
+    if (table && !db[table]) {
+      db[table] = [];
+    }
+
+    if (action === 'INSERT') {
+      db[table].push(payload);
+    } 
+    else if (action === 'UPDATE') {
+      const index = db[table].findIndex(item => item.id === payload.id);
+      if (index !== -1) db[table][index] = { ...db[table][index], ...payload };
+    } 
+    else if (action === 'DELETE') {
+      db[table] = db[table].filter(item => item.id !== payload.id);
+    }
+    else if (action === 'OVERWRITE') {
+      db = payload;
+    }
+
+    // Save strictly structured data back to the sheet
+    sheet.getRange(1, 1).setValue(JSON.stringify(db));
+    
+    lock.releaseLock();
+    return ContentService.createTextOutput(JSON.stringify({ success: true, action, table }));
+
   } catch(err) {
     return ContentService.createTextOutput(JSON.stringify({ success: false, error: err.toString() }));
   }
@@ -22,13 +50,9 @@ function doPost(e) {
 function doGet() {
   try {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    // Return precisely the entire JSON payload to the GitHub site
-    const payload = sheet.getRange(1, 1).getValue();
-    
-    return ContentService.createTextOutput(payload || JSON.stringify({ engagements: [], issues: [] }))
-      .setMimeType(ContentService.MimeType.JSON);
+    const dbString = sheet.getRange(1, 1).getValue();
+    return ContentService.createTextOutput(dbString || "{}").setMimeType(ContentService.MimeType.JSON);
   } catch(err) {
-    return ContentService.createTextOutput(JSON.stringify({ success: false, error: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput("{}").setMimeType(ContentService.MimeType.JSON);
   }
 }
