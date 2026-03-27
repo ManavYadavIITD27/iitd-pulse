@@ -42,3 +42,11 @@ IITD Pulse eliminates this fragmentation by bringing every single service under 
 ### E. Campus Care & Infrastructure (Maintenance Portal)
 - **The Problem it solves:** Reporting hostel breakages (like a leaking pipe or broken corridor light) usually requires hunting down a warden or filling out a grievance ledger, leading to severely delayed repairs.
 - **What you can do here:** Students can instantly file an urgent issue directly from their phone. They can select the exact broken department (e.g., Electrical, Plumbing), type in their specific hostel room, and even snap a photo of the breakage to attach as visual proof for the repairmen. Once submitted, they receive a unique Ticket ID and a live visual timeline tracking the repair progress from "Problem Logged" all the way to "Resolved".
+
+---
+
+## 5. The Future Roadmap (What's Next?)
+Because IITD Pulse is built on an incredibly scalable, lightning-fast foundation, we have the ability to continuously integrate new facets of campus life without slowing down the app.
+- **Library Integration:** Digital seat reservations and book checkouts.
+- **Mess Food Delivery:** A centralized menu where students can order midnight snacks directly from night canteens.
+- **Campus Security ID Pass:** A digital QR code built directly into the app designed to replace physical ID cards for entering restricted campus zones like laboratories or dorms.
