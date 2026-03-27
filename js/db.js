@@ -29,43 +29,70 @@ const DB = {
     return JSON.parse(localStorage.getItem('pulse_issues')) || [];
   },
 
+  async syncToCloud() {
+    if (!this.CLOUD_URL) return;
+    const payload = JSON.stringify({
+      engagements: this.getEngagements(),
+      issues: this.getIssues(),
+      lastUpdated: Date.now()
+    });
+    try {
+      await fetch(this.CLOUD_URL, {
+        method: 'POST', body: JSON.stringify({ payload })
+      });
+    } catch(e) { console.warn('Cloud sync failed'); }
+  },
+
+  async syncFromCloud() {
+    if (!this.CLOUD_URL) return;
+    try {
+      const response = await fetch(this.CLOUD_URL);
+      const data = await response.json();
+      
+      if (data.engagements) localStorage.setItem('pulse_engagements', JSON.stringify(data.engagements));
+      if (data.issues) localStorage.setItem('pulse_issues', JSON.stringify(data.issues));
+      
+      // If the dashboard is open, trigger a silent re-render automatically!
+      if (typeof window.updateDashboard === 'function') {
+        window.updateDashboard();
+      }
+    } catch(e) { console.warn('Cloud pull failed'); }
+  },
+
   addEngagement(type, title, subtitle, icon = 'event', color = 'primary') {
     const list = this.getEngagements();
     list.unshift({ id: 'eng_' + Date.now(), type, title, subtitle, icon, color, status: 'Confirmed' });
     localStorage.setItem('pulse_engagements', JSON.stringify(list));
-    
-    // Attempt cloud sync if configured
-    if (this.CLOUD_URL) {
-      fetch(this.CLOUD_URL + '?action=addBooking', {
-        method: 'POST', body: JSON.stringify({ user: Session.getUser(), type, title, subtitle })
-      }).catch(e => console.warn('Cloud sync failed'));
-    }
+    this.syncToCloud();
   },
 
   removeEngagement(id) {
     let list = this.getEngagements();
     list = list.filter(e => e.id !== id);
     localStorage.setItem('pulse_engagements', JSON.stringify(list));
+    this.syncToCloud();
   },
 
   addIssue(title, subtitle) {
     const list = this.getIssues();
     list.unshift({ id: 'iss_' + Date.now(), status: 'In Progress', title, subtitle });
     localStorage.setItem('pulse_issues', JSON.stringify(list));
-    
-    // Attempt cloud sync if configured
-    if (this.CLOUD_URL) {
-      fetch(this.CLOUD_URL + '?action=addIssue', {
-        method: 'POST', body: JSON.stringify({ user: Session.getUser(), title, subtitle })
-      }).catch(e => console.warn('Cloud sync failed'));
-    }
+    this.syncToCloud();
   },
 
   removeIssue(id) {
     let list = this.getIssues();
     list = list.filter(e => e.id !== id);
     localStorage.setItem('pulse_issues', JSON.stringify(list));
+    this.syncToCloud();
   }
 };
 
 DB.init();
+
+// Automatically pull from cloud on startup to sync immediately across devices!
+if (DB.CLOUD_URL) {
+  document.addEventListener('DOMContentLoaded', () => {
+    DB.syncFromCloud();
+  });
+}

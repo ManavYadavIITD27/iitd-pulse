@@ -1,25 +1,34 @@
 // backend/PulseDB.gs
 // Instructions:
-// 1. Go to script.google.com and create a new project.
-// 2. Paste this code.
-// 3. Deploy > New Deployment > Web App (Execute as: Me, Access: Anyone).
-// 4. Copy the Web App URL and paste it into js/db.js as CLOUD_URL.
+// 1. Go to script.google.com and open your existing project.
+// 2. Paste this updated code.
+// 3. Deploy > Manage Deployments > Edit (pencil icon) > New Version > Deploy.
+// 4. Your GitHub site will now securely have full remote control over the database schema.
 
 function doPost(e) {
   try {
-    const action = e.parameter.action;
     const data = JSON.parse(e.postData.contents);
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     
-    if (action === 'addBooking') {
-      sheet.appendRow([new Date(), data.user, data.type, data.title, data.subtitle]);
-      return ContentService.createTextOutput(JSON.stringify({ success: true }));
-    }
+    // Overwrite Cell A1 tightly with the entire GitHub database JSON block
+    sheet.getRange(1, 1).setValue(data.payload);
+    
+    return ContentService.createTextOutput(JSON.stringify({ success: true }));
   } catch(err) {
     return ContentService.createTextOutput(JSON.stringify({ success: false, error: err.toString() }));
   }
 }
 
 function doGet() {
-  return ContentService.createTextOutput("IITD Pulse Cloud Backend is Active");
+  try {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    // Return precisely the entire JSON payload to the GitHub site
+    const payload = sheet.getRange(1, 1).getValue();
+    
+    return ContentService.createTextOutput(payload || JSON.stringify({ engagements: [], issues: [] }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({ success: false, error: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
