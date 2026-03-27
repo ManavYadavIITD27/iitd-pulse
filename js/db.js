@@ -3,8 +3,8 @@
    ============================================ */
 
 const DB = {
-  // To sync across devices, user will add backend URL here later
-  CLOUD_URL: null, 
+  // Global backend for cross-device sync
+  CLOUD_URL: "https://script.google.com/macros/s/AKfycbzdxvXWDbXhKqG3i_82hcvCDecXY2sFZ73b2RlG_GdZ7yaQAwaz1CCaDZ-wDxvQmgoEbQ/exec", 
   
   init() {
     if (!localStorage.getItem('pulse_engagements')) {
