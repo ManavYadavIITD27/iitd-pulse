@@ -199,7 +199,7 @@
         <!-- Table Tennis -->
         <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive md:col-span-2 xl:col-span-2 flex-row items-center">
           <div class="w-48 h-32 rounded-2xl overflow-hidden relative shrink-0 hidden md:block">
-            <img alt="Table Tennis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1511067007357-d2b4a16b9b39?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"/>
+            <img alt="Table Tennis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1534158914592-062992fbe900?w=800&q=80"/>
           </div>
           <div class="flex-1">
             <h3 class="font-bold font-headline text-xl">Table Tennis Hall</h3>
@@ -325,10 +325,6 @@
     <p class="text-slate-500 text-sm mb-6">You are about to secure a slot for <strong id="fm-name" class="text-on-surface">Facility</strong> at <strong id="fm-time" class="text-on-surface">Time</strong>.</p>
     
     <div class="space-y-4 mb-6">
-      <div class="space-y-1">
-        <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Select Date</label>
-        <input type="date" id="fm-date-picker" class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-primary focus:border-primary transition-all font-semibold text-sm">
-      </div>
       <div class="flex justify-between items-center p-4 bg-surface-container-lowest rounded-xl border border-slate-100"><span class="text-sm font-bold text-slate-500">Authorized Link</span><span class="text-xs font-bold bg-secondary/10 text-secondary px-2 py-1 rounded">Student ID</span></div>
     </div>
 
@@ -580,18 +576,8 @@
   
   function confirmFacility() {
     closeModal('facility-modal');
-    
-    let selectedDate = document.getElementById('fm-date-picker').value;
-    if (!selectedDate) {
-      // Default to today formatted nicely
-      const today = new Date();
-      selectedDate = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    } else {
-      selectedDate = new Date(selectedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    }
-    
-    DB.addEngagement('sports', activeFacility, selectedDate + ' at ' + activeTime + ' · Sports Complex', 'sports_tennis', 'secondary');
-    NotifSim.sendBookingConfirmation(activeFacility, selectedDate + ' at ' + activeTime);
+    DB.addEngagement('sports', activeFacility, 'Today at ' + activeTime + ' · Sports Complex', 'sports_tennis', 'secondary');
+    NotifSim.sendBookingConfirmation(activeFacility, activeTime);
   }
   
   function confirmRental() {
