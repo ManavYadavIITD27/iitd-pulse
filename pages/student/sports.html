@@ -197,17 +197,37 @@
         </div>
 
         <!-- Table Tennis -->
-        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive md:col-span-2 xl:col-span-2 flex-row items-center">
-          <div class="w-48 h-32 rounded-2xl overflow-hidden relative shrink-0 hidden md:block">
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive">
+          <div class="h-32 rounded-2xl overflow-hidden relative">
             <img alt="Table Tennis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1534158914592-062992fbe900?w=800&q=80"/>
+            <div class="absolute top-3 right-3 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold">AVAILABLE</div>
           </div>
           <div class="flex-1">
-            <h3 class="font-bold font-headline text-xl">Table Tennis Hall</h3>
-            <p class="text-sm text-slate-500 mb-4">Tables 1-6 (Indoor Sports Center)</p>
-            <div class="flex flex-wrap gap-3">
-              <button onclick="openFacilityModal('TT Hall - Table #2', '5:00 – 6:00 PM')" class="px-6 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">Table 2 (5:00 PM)</button>
-              <button class="px-4 py-2 bg-slate-100 text-slate-400 font-bold text-xs rounded-lg cursor-not-allowed">Tb 1 (Bkd)</button>
-              <button class="px-4 py-2 bg-slate-100 text-slate-400 font-bold text-xs rounded-lg cursor-not-allowed">Tb 3 (Bkd)</button>
+            <h3 class="font-bold font-headline text-lg">Table Tennis Hall</h3>
+            <p class="text-xs text-slate-500">Tables 1-6 (Indoor)</p>
+          </div>
+          <div class="mt-auto border-t border-slate-100 pt-4">
+            <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-slate-400">NEXT SLOTS</span></div>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="openFacilityModal('TT Hall - Table 2', '5:00 – 6:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">5:00 PM</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Squash -->
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4 group card-interactive">
+          <div class="h-32 rounded-2xl overflow-hidden relative">
+            <img alt="Squash" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1620958197177-7d52f6c90538?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"/>
+            <div class="absolute top-3 right-3 bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold">1 LEFT</div>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold font-headline text-lg">Squash Courts</h3>
+            <p class="text-xs text-slate-500">Courts A & B</p>
+          </div>
+          <div class="mt-auto border-t border-slate-100 pt-4">
+            <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-slate-400">NEXT SLOTS</span></div>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="openFacilityModal('Squash Court A', '7:00 – 8:00 PM')" class="flex-1 py-2 border border-secondary text-secondary font-bold text-sm rounded-lg hover:bg-secondary hover:text-white active:scale-95 transition-all">7:00 PM</button>
             </div>
           </div>
         </div>
