@@ -324,7 +324,12 @@
     <h3 class="text-2xl font-black font-headline text-primary mb-1">Confirm Booking</h3>
     <p class="text-slate-500 text-sm mb-6">You are about to secure a slot for <strong id="fm-name" class="text-on-surface">Facility</strong> at <strong id="fm-time" class="text-on-surface">Time</strong>.</p>
     
-       <div class="flex justify-between items-center p-4 bg-surface-container-lowest rounded-xl border border-slate-100"><span class="text-sm font-bold text-slate-500">Authorized Link</span><span class="text-xs font-bold bg-secondary/10 text-secondary px-2 py-1 rounded">Student ID</span></div>
+    <div class="space-y-4 mb-6">
+      <div class="space-y-1">
+        <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Select Date</label>
+        <input type="date" id="fm-date-picker" class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-primary focus:border-primary transition-all font-semibold text-sm">
+      </div>
+      <div class="flex justify-between items-center p-4 bg-surface-container-lowest rounded-xl border border-slate-100"><span class="text-sm font-bold text-slate-500">Authorized Link</span><span class="text-xs font-bold bg-secondary/10 text-secondary px-2 py-1 rounded">Student ID</span></div>
     </div>
 
     <div class="flex gap-3">
@@ -403,8 +408,18 @@
   
   function confirmFacility() {
     closeModal('facility-modal');
-    DB.addEngagement('sports', activeFacility, 'Today at ' + activeTime + ' · Sports Complex', 'sports_tennis', 'secondary');
-    NotifSim.sendBookingConfirmation(activeFacility, activeTime);
+    
+    let selectedDate = document.getElementById('fm-date-picker').value;
+    if (!selectedDate) {
+      // Default to today formatted nicely
+      const today = new Date();
+      selectedDate = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    } else {
+      selectedDate = new Date(selectedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+    
+    DB.addEngagement('sports', activeFacility, selectedDate + ' at ' + activeTime + ' · Sports Complex', 'sports_tennis', 'secondary');
+    NotifSim.sendBookingConfirmation(activeFacility, selectedDate + ' at ' + activeTime);
   }
   
   function confirmRental() {
