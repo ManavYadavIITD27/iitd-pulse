@@ -54,8 +54,8 @@
             <h1 class="text-4xl md:text-5xl font-extrabold font-headline text-white mb-2 -tracking-tight">Elite Athletics Hub</h1>
             <p class="text-white/80 max-w-lg font-body mb-6">Book premium facilities and rent equipment seamlessly. Present your Student ID card at the front desk for verification upon arrival. No additional payments required.</p>
             <div class="flex gap-4">
-              <button onclick="document.getElementById('equipment').scrollIntoView({behavior:'smooth'})" class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-secondary-container/90 transition-all active:scale-95 btn-interactive"><span class="material-symbols-outlined">sports_tennis</span>Rent Equipment</button>
-              <button onclick="document.getElementById('facilities').scrollIntoView({behavior:'smooth'})" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-bold hover:bg-white/20 transition-all active:scale-95 btn-interactive">Book Facility</button>
+              <button onclick="openCustomRentalModal()" class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-secondary-container/90 transition-all active:scale-95 btn-interactive"><span class="material-symbols-outlined">sports_tennis</span>Rent Equipment</button>
+              <button onclick="openCustomModal()" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-bold hover:bg-white/20 transition-all active:scale-95 btn-interactive">Book Facility</button>
             </div>
           </div>
         </div>
@@ -369,6 +369,96 @@
   </div>
 </div>
 
+<div id="custom-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('custom-modal')"></div>
+  <div class="bg-surface w-full max-w-md p-6 lg:p-8 rounded-3xl z-10 shadow-2xl relative border border-white/10 scale-95 opacity-0 transition-all duration-300" id="cm-dialog">
+    <button onclick="closeModal('custom-modal')" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-primary transition-colors bg-slate-100 rounded-full"><span class="material-symbols-outlined">close</span></button>
+    <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-4"><span class="material-symbols-outlined">edit_calendar</span></div>
+    <h3 class="text-2xl font-black font-headline text-primary mb-1">Custom Booking</h3>
+    <p class="text-slate-500 text-sm mb-6">Select your desired facility, date, and timeframe to instantly check live availability.</p>
+    
+    <form onsubmit="event.preventDefault();" class="space-y-4 mb-2">
+       <div class="space-y-1">
+         <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Facility / Ground</label>
+         <select id="cm-facility" class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-primary focus:border-primary transition-all font-semibold text-sm">
+           <option>Main Football Arena</option><option>Cricket Oval</option><option>Tennis Clay Courts</option><option>Basketball Courts</option><option>Olympic Pool</option><option>Badminton Hub</option>
+         </select>
+       </div>
+       <div class="space-y-1">
+         <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Select Date</label>
+         <input type="date" id="cm-date" class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-primary focus:border-primary transition-all font-semibold text-sm">
+       </div>
+       <div class="space-y-1">
+         <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Time Slot</label>
+         <select id="cm-time" class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-primary focus:border-primary transition-all font-semibold text-sm">
+           <option>Morning (6:00 - 8:00 AM)</option>
+           <option>Afternoon (2:00 - 4:00 PM)</option>
+           <option>Evening Prime (5:00 - 7:00 PM)</option>
+           <option>Late Night (8:00 - 10:00 PM)</option>
+         </select>
+       </div>
+
+       <div id="cm-availability-box" class="hidden p-4 rounded-xl items-center gap-3 mt-4"></div>
+
+       <div class="mt-4 border-t border-slate-100 pt-4">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Quick Pick Open Slots</p>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="setQuickSlot('cm', 'Today', 'Evening Prime (5:00 - 7:00 PM)')" class="flex-1 py-2 bg-slate-100 text-slate-600 font-bold text-xs rounded-lg hover:bg-secondary hover:text-white transition-colors">Today 5:00 PM</button>
+            <button type="button" onclick="setQuickSlot('cm', 'Tomorrow', 'Morning (6:00 - 8:00 AM)')" class="flex-1 py-2 bg-slate-100 text-slate-600 font-bold text-xs rounded-lg hover:bg-secondary hover:text-white transition-colors">Tmrw 6:00 AM</button>
+            <button type="button" onclick="setQuickSlot('cm', 'Tomorrow', 'Afternoon (2:00 - 4:00 PM)')" class="flex-1 py-2 bg-slate-100 text-slate-600 font-bold text-xs rounded-lg hover:bg-secondary hover:text-white transition-colors">Tmrw 2:00 PM</button>
+          </div>
+       </div>
+
+      <div class="flex gap-3 pt-6 border-t border-slate-100 mt-6" id="cm-buttons">
+        <button type="button" onclick="checkCustomAvailability('cm')" class="w-full py-3 bg-slate-100 text-slate-600 font-bold rounded-xl hover:bg-slate-200 transition-colors">Check Availability</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="custom-rental-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('custom-rental-modal')"></div>
+  <div class="bg-surface w-full max-w-md p-6 lg:p-8 rounded-3xl z-10 shadow-2xl relative border border-white/10 scale-95 opacity-0 transition-all duration-300" id="crm-dialog">
+    <button onclick="closeModal('custom-rental-modal')" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-primary transition-colors bg-slate-100 rounded-full"><span class="material-symbols-outlined">close</span></button>
+    <div class="w-12 h-12 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mb-4"><span class="material-symbols-outlined">sports_basketball</span></div>
+    <h3 class="text-2xl font-black font-headline text-primary mb-1">Custom Rental</h3>
+    <p class="text-slate-500 text-sm mb-6">Select your required equipment, pickup date, and rental duration.</p>
+    
+    <form onsubmit="event.preventDefault();" class="space-y-4 mb-2">
+       <div class="space-y-1">
+         <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Equipment Type</label>
+         <select id="crm-facility" class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-secondary focus:border-secondary transition-all font-semibold text-sm">
+           <option>Football</option><option>Tennis Racket</option><option>Table Tennis Bat</option><option>Basketball</option><option>Badminton Racket</option>
+         </select>
+       </div>
+       <div class="space-y-1">
+         <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Pickup Date</label>
+         <input type="date" id="crm-date" class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-secondary focus:border-secondary transition-all font-semibold text-sm">
+       </div>
+       <div class="space-y-1">
+         <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Duration</label>
+         <select id="crm-time" class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl p-3 focus:ring-secondary focus:border-secondary transition-all font-semibold text-sm">
+           <option>1 Hour</option><option>2 Hours</option><option>4 Hours (Half Day)</option><option>24 Hours (Full Day)</option>
+         </select>
+       </div>
+
+       <div id="crm-availability-box" class="hidden p-4 rounded-xl items-center gap-3 mt-4"></div>
+
+       <div class="mt-4 border-t border-slate-100 pt-4">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Quick Checkout Suggestions</p>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="setQuickSlot('crm', 'Today', '2 Hours')" class="flex-1 py-2 bg-slate-100 text-slate-600 font-bold text-xs rounded-lg hover:bg-secondary hover:text-white transition-colors">Today (2 Hrs)</button>
+            <button type="button" onclick="setQuickSlot('crm', 'Tomorrow', '1 Hour')" class="flex-1 py-2 bg-slate-100 text-slate-600 font-bold text-xs rounded-lg hover:bg-secondary hover:text-white transition-colors">Tmrw (1 Hr)</button>
+          </div>
+       </div>
+
+      <div class="flex gap-3 pt-6 border-t border-slate-100 mt-6" id="crm-buttons">
+        <button type="button" onclick="checkCustomAvailability('crm')" class="w-full py-3 bg-slate-100 text-slate-600 font-bold rounded-xl hover:bg-slate-200 transition-colors">Check Inventory</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
   let activeFacility = '';
   let activeTime = '';
@@ -397,8 +487,90 @@
     setTimeout(() => { dialog.classList.remove('scale-95', 'opacity-0'); }, 10);
   }
   
+  function setQuickSlot(prefix, dayType, timeVal) {
+    const d = new Date();
+    if (dayType === 'Tomorrow') d.setDate(d.getDate() + 1);
+    
+    // YYYY-MM-DD
+    const isoDate = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    
+    document.getElementById(prefix + '-date').value = isoDate;
+    document.getElementById(prefix + '-time').value = timeVal;
+    
+    // Automatically trigger check
+    checkCustomAvailability(prefix);
+  }
+
+  function openCustomModal() {
+    const modal = document.getElementById('custom-modal');
+    const dialog = document.getElementById('cm-dialog');
+    document.getElementById('cm-availability-box').classList.add('hidden');
+    document.getElementById('cm-buttons').innerHTML = `<button type="button" onclick="checkCustomAvailability('cm')" class="w-full py-3 bg-slate-100 text-slate-600 font-bold rounded-xl hover:bg-slate-200 transition-colors">Check Availability</button>`;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => { dialog.classList.remove('scale-95', 'opacity-0'); }, 10);
+  }
+
+  function openCustomRentalModal() {
+    const modal = document.getElementById('custom-rental-modal');
+    const dialog = document.getElementById('crm-dialog');
+    document.getElementById('crm-availability-box').classList.add('hidden');
+    document.getElementById('crm-buttons').innerHTML = `<button type="button" onclick="checkCustomAvailability('crm')" class="w-full py-3 bg-slate-100 text-slate-600 font-bold rounded-xl hover:bg-slate-200 transition-colors">Check Inventory</button>`;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => { dialog.classList.remove('scale-95', 'opacity-0'); }, 10);
+  }
+
+  function checkCustomAvailability(prefix) {
+    const box = document.getElementById(prefix + '-availability-box');
+    box.classList.remove('hidden', 'bg-error/10');
+    box.classList.add('flex', 'bg-slate-100', 'animate-pulse');
+    box.innerHTML = `<span class="material-symbols-outlined text-slate-500 animate-spin">progress_activity</span><span class="text-xs font-bold text-slate-500">Connecting to database...</span>`;
+    
+    setTimeout(() => {
+      box.classList.remove('animate-pulse', 'bg-slate-100');
+      box.classList.add('bg-secondary/10');
+      box.innerHTML = `<span class="material-symbols-outlined text-secondary">check_circle</span><span class="text-xs font-bold text-secondary">Instantly Available! Guaranteed zero friction.</span>`;
+      
+      const isRental = prefix === 'crm';
+      document.getElementById(prefix + '-buttons').innerHTML = `
+        <button type="button" onclick="closeModal('${isRental ? 'custom-rental-modal' : 'custom-modal'}')" class="flex-1 py-3 text-slate-500 font-bold hover:bg-slate-100 rounded-xl transition-colors">Cancel</button>
+        <button type="button" onclick="confirmCustomBooking('${prefix}')" class="flex-[2] py-3 bg-${isRental ? 'secondary' : 'primary'} text-white font-bold rounded-xl shadow-lg hover:shadow-xl active:scale-95 transition-all">Yes, Book Now</button>
+      `;
+    }, 1000);
+  }
+
+  function confirmCustomBooking(prefix) {
+    const facility = document.getElementById(prefix + '-facility').value;
+    const time = document.getElementById(prefix + '-time').value;
+    let selectedDate = document.getElementById(prefix + '-date').value;
+    
+    if (!selectedDate) {
+      const today = new Date();
+      selectedDate = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    } else {
+      selectedDate = new Date(selectedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+    
+    const isRental = prefix === 'crm';
+    closeModal(isRental ? 'custom-rental-modal' : 'custom-modal');
+    
+    DB.addEngagement('sports', facility + (isRental ? ' Rental' : ''), selectedDate + ' (' + time + ') · ' + (isRental ? 'SAC Desk Pickup' : 'Custom Booking'), 'sports_tennis', 'secondary');
+    NotifSim.sendBookingConfirmation(facility, selectedDate + ' (' + time + ')');
+  }
+
   function closeModal(id) {
-    const dialog = document.getElementById(id === 'facility-modal' ? 'fm-dialog' : 'rm-dialog');
+    let dialogId = '';
+    if (id === 'facility-modal') dialogId = 'fm-dialog';
+    else if (id === 'rental-modal') dialogId = 'rm-dialog';
+    else if (id === 'custom-modal') dialogId = 'cm-dialog';
+    else if (id === 'custom-rental-modal') dialogId = 'crm-dialog';
+    
+    const dialog = document.getElementById(dialogId);
+    if (!dialog) return;
+    
     dialog.classList.add('scale-95', 'opacity-0');
     setTimeout(() => {
       document.getElementById(id).classList.add('hidden');
